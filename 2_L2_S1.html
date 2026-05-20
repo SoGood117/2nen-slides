@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: The History of Japanese Food - Section 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 20px 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide.active { display: flex; }
+        .bg-ocean { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&q=80&w=1600') center/cover; }
+
+        .text-reading { font-size: 1.9rem; line-height: 1.8; }
+        .text-check { font-size: 2.1rem; line-height: 1.5; }
+        .word-wrapper { display: inline-block; white-space: nowrap; }
+        .slashable-char {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            padding: 0 1px;
+            transition: background 0.2s;
+        }
+        .slashable-char:hover { background-color: rgba(59, 130, 246, 0.1); }
+        .slashable-space { display: inline-block; min-width: 0.8em; cursor: pointer; }
+        .slash-mark::after {
+            content: "/";
+            color: #ef4444;
+            font-weight: 900;
+            margin-left: 4px;
+            margin-right: 4px;
+            display: inline-block;
+            transform: scale(1.2);
+            pointer-events: none;
+        }
+        .highlight-static {
+            font-weight: normal;
+            color: #1f2937 !important;
+            border-bottom: none !important;
+            padding: 0;
+            margin: 0;
+            display: inline;
+        }
+        .hidden-answer {
+            display: inline-block;
+            color: transparent !important;
+            border-bottom: 3px solid #3b82f6 !important;
+            padding: 0 8px;
+            margin: 0 4px;
+            cursor: pointer;
+            min-width: 120px;
+            text-align: center;
+            vertical-align: baseline;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .hidden-answer.show {
+            color: #ef4444 !important;
+            font-weight: bold;
+        }
+        .phrase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .phrase-card:hover { border-color: #3b82f6; transform: translateX(5px); }
+        .phrase-en { font-size: 1.6rem; font-weight: bold; color: #1f2937; }
+        .phrase-ja { font-size: 1.3rem; color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
+        .phrase-card.active .phrase-ja { opacity: 1; }
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .content-box {
+            height: 600px;
+            width: 100%;
+            max-width: 1152px;
+            overflow-y: auto;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background-color: white;
+        }
+        .check-bracket { color: #3b82f6; font-weight: bold; width: 20px; display: inline-block; text-align: center; }
+    </style>
+</head>
+<body>
+    <script>
+        const SLIDE_DATA = {
+            title: "Lesson 2: The History of Japanese Food",
+            subtitle: "Section 1",
+            warmup: {
+                question: "What did you eat last night?",
+                answerBase: "I ate"
+            },
+            reading: [
+                "About 20,000 years ago, Japanese {ancestors} mainly had {nuts}, seafood, and wild animals.",
+                "They ate them with their fingers.",
+                "In the Nara {era} about 1,300 years ago, eating cows, horses, chickens, and dogs was {forbidden} because of the lessons of Buddhism.",
+                "People had a simple meal with rice, vegetables, and seafood. They started to use {chopsticks} and had two meals a day."
+            ],
+            translationPhrases: [
+                { en: "About 20,000 years ago,", ja: "約2万年前、" },
+                { en: "Japanese ancestors mainly had nuts, seafood, and wild animals.", ja: "日本人の祖先は主に木の実、海産物、野生の動物を食べていました。" },
+                { en: "They ate them with their fingers.", ja: "彼らは指で食べていました。" },
+                { en: "In the Nara era about 1,300 years ago,", ja: "約1,300年前の奈良時代には、" },
+                { en: "eating cows, horses, chickens, and dogs was forbidden", ja: "牛、馬、鶏、犬を食べることは禁止されていました" },
+                { en: "because of the lessons of Buddhism.", ja: "仏教の教えのために。" },
+                { en: "People had a simple meal with rice, vegetables, and seafood.", ja: "人々は米、野菜、海産物の質素な食事をしていました。" },
+                { en: "They started to use chopsticks and had two meals a day.", ja: "彼らは箸を使い始め、1日2食でした。" }
+            ],
+            checks: [
+                { q: "1. How did people eat food about 20,000 years ago?", sub: "— They ate food with their <span class='check-bracket'>(</span> {fingers} <span class='check-bracket'>)</span>." },
+                { q: "2. In the Nara era, Japanese people had two <span class='check-bracket'>(</span> {meals} <span class='check-bracket'>)</span> a day." }
+            ],
+            words: [
+                { en: "ancestor(s)", ja: "祖先" },
+                { en: "mainly", ja: "主に" },
+                { en: "nut(s)", ja: "木の実" },
+                { en: "era", ja: "時代" },
+                { en: "forbid(den)", ja: "禁止する" },
+                { en: "chopstick(s)", ja: "箸" }
+            ],
+            newWords: [
+                { en: "ancestor", ja: "祖先（名）" },
+                { en: "mainly", ja: "主に（副）" },
+                { en: "nut", ja: "木の実（名）" },
+                { en: "era", ja: "時代（名）" },
+                { en: "forbidden", ja: "禁止された（形）" },
+                { en: "chopstick", ja: "箸（名）" }
+            ],
+            dialogue: {
+                target: "natto",
+                options: ["sushi", "ramen", "tempura"]
+            }
+        };
+    </script>
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-ocean text-white justify-center text-center">
+        <h1 id="main-title" class="text-9xl font-black mb-8"></h1>
+        <p id="sub-title" class="text-4xl opacity-90"></p>
+    </div>
+    <!-- Slide 2: Warm Up -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-blue-600">Warm-up</h2>
+        <div class="content-box bg-blue-50 border border-blue-100 flex flex-col justify-center space-y-8 text-4xl">
+            <div class="bg-blue-100/50 p-8 rounded-2xl w-full">
+                <p class="text-blue-500 text-sm font-black uppercase mb-2">Teacher</p>
+                <p id="warmup-q" class="font-bold text-gray-800"></p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl w-full border-4 border-dashed border-gray-100">
+                <p class="text-gray-400 text-sm font-black uppercase mb-2">Student</p>
+                <p class="font-bold text-gray-800"><span id="warmup-a-base"></span> ____________________.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Slide 3: Reading Section -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-gray-900">Reading Section</h2>
+        <div id="reading-content-static" class="content-box bg-gray-50 border border-gray-100 text-reading"></div>
+    </div>
+    <!-- Slide 4: New Words -->
+    <div class="slide bg-gray-900 text-white">
+        <h2 class="slide-title text-yellow-400">New Words</h2>
+        <div id="new-words-grid" class="content-box bg-gray-800 border-2 border-gray-700 grid grid-cols-2 md:grid-cols-3 gap-5"></div>
+    </div>
+    <!-- Slide 5: KEY WORDS -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-yellow-600">Key Words</h2>
+        <div class="content-box border border-yellow-200 bg-gradient-to-b from-yellow-50 to-white flex flex-col justify-between" style="padding:1.5rem 2rem;">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5" style="flex:1;">
+                <!-- Card 1: ancestor -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#ef4444;">&#10102;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fef3c7"/>
+                            <rect y="115" width="200" height="45" fill="#fde68a"/>
+                            <!-- Ancient family group -->
+                            <!-- Parent figure -->
+                            <g transform="translate(100,50)">
+                                <circle cx="0" cy="-15" r="12" fill="#d4a574"/>
+                                <path d="M-8,0 L-6,-5 L6,-5 L8,0 L6,30 L2,30 L1,12 L-1,12 L-2,30 L-6,30 Z" fill="#92400e"/>
+                                <circle cx="-4" cy="-16" r="1.5" fill="#1e293b"/><circle cx="4" cy="-16" r="1.5" fill="#1e293b"/>
+                                <path d="M-3,-12 Q0,-10 3,-12" stroke="#1e293b" stroke-width="0.8" fill="none"/>
+                                <!-- Headband -->
+                                <rect x="-13" y="-22" width="26" height="4" rx="2" fill="#dc2626"/>
+                            </g>
+                            <!-- Child left -->
+                            <g transform="translate(65,65)">
+                                <circle cx="0" cy="-10" r="8" fill="#d4a574"/>
+                                <path d="M-5,0 L-3,-4 L3,-4 L5,0 L3,18 L1,18 L0,8 L-1,18 L-3,18 Z" fill="#78350f"/>
+                                <circle cx="-3" cy="-11" r="1" fill="#1e293b"/><circle cx="3" cy="-11" r="1" fill="#1e293b"/>
+                            </g>
+                            <!-- Child right -->
+                            <g transform="translate(135,65)">
+                                <circle cx="0" cy="-10" r="8" fill="#d4a574"/>
+                                <path d="M-5,0 L-3,-4 L3,-4 L5,0 L3,18 L1,18 L0,8 L-1,18 L-3,18 Z" fill="#78350f"/>
+                                <circle cx="-3" cy="-11" r="1" fill="#1e293b"/><circle cx="3" cy="-11" r="1" fill="#1e293b"/>
+                            </g>
+                            <!-- Arrow showing lineage -->
+                            <path d="M60,105 Q100,95 140,105" stroke="#92400e" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+                            <text x="100" y="130" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">&#x27A1;</text>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">ancestor</span> ）</div>
+                </div>
+                <!-- Card 2: nut -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#f59e0b;">&#10103;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#ecfdf5"/>
+                            <rect y="120" width="200" height="40" fill="#d1fae5"/>
+                            <!-- Acorn -->
+                            <g transform="translate(70,45)">
+                                <ellipse cx="0" cy="15" rx="16" ry="22" fill="#92400e"/>
+                                <ellipse cx="0" cy="15" rx="12" ry="18" fill="#a16207"/>
+                                <path d="M-18,0 Q-18,-8 0,-10 Q18,-8 18,0 Q10,4 0,5 Q-10,4 -18,0 Z" fill="#65a30d"/>
+                                <line x1="0" y1="-10" x2="0" y2="-18" stroke="#65a30d" stroke-width="2.5" stroke-linecap="round"/>
+                            </g>
+                            <!-- Walnut -->
+                            <g transform="translate(130,50)">
+                                <ellipse cx="0" cy="10" rx="18" ry="14" fill="#78350f"/>
+                                <ellipse cx="0" cy="10" rx="14" ry="10" fill="#92400e"/>
+                                <line x1="0" y1="0" x2="0" y2="20" stroke="#713f12" stroke-width="1"/>
+                                <path d="M-10,10 Q0,6 10,10" stroke="#713f12" stroke-width="0.8" fill="none"/>
+                            </g>
+                            <!-- Chestnut -->
+                            <g transform="translate(100,80)">
+                                <ellipse cx="0" cy="5" rx="14" ry="16" fill="#92400e"/>
+                                <ellipse cx="0" cy="5" rx="10" ry="12" fill="#a16207"/>
+                                <path d="M-14,-5 Q-10,-12 0,-14 Q10,-12 14,-5" stroke="#65a30d" stroke-width="2" fill="#84cc16" opacity="0.6"/>
+                                <circle cx="0" cy="-14" r="2" fill="#65a30d"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">nut</span> ）</div>
+                </div>
+                <!-- Card 3: era -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#22c55e;">&#10104;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#eff6ff"/>
+                            <rect y="120" width="200" height="40" fill="#dbeafe"/>
+                            <!-- Timeline -->
+                            <line x1="20" y1="70" x2="180" y2="70" stroke="#3b82f6" stroke-width="3"/>
+                            <!-- Era markers -->
+                            <circle cx="40" cy="70" r="6" fill="#ef4444"/><text x="40" y="55" text-anchor="middle" font-size="8" fill="#374151" font-weight="bold">Jomon</text>
+                            <circle cx="80" cy="70" r="6" fill="#f59e0b"/><text x="80" y="55" text-anchor="middle" font-size="8" fill="#374151" font-weight="bold">Nara</text>
+                            <circle cx="120" cy="70" r="6" fill="#22c55e"/><text x="120" y="55" text-anchor="middle" font-size="8" fill="#374151" font-weight="bold">Edo</text>
+                            <circle cx="160" cy="70" r="6" fill="#8b5cf6"/><text x="160" y="55" text-anchor="middle" font-size="8" fill="#374151" font-weight="bold">Meiji</text>
+                            <!-- Arrow -->
+                            <polygon points="180,70 174,64 174,76" fill="#3b82f6"/>
+                            <!-- Scroll/calendar -->
+                            <g transform="translate(100,105)">
+                                <rect x="-25" y="-10" width="50" height="25" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+                                <text x="0" y="5" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">時代</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">era</span> ）</div>
+                </div>
+                <!-- Card 4: chopstick -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#8b5cf6;">&#10105;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fef2f2"/>
+                            <rect y="115" width="200" height="45" fill="#fee2e2"/>
+                            <!-- Chopsticks -->
+                            <g transform="translate(100,75)">
+                                <line x1="-45" y1="-40" x2="40" y2="35" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="-30" y1="-40" x2="50" y2="25" stroke="#a16207" stroke-width="4" stroke-linecap="round"/>
+                                <!-- Tips -->
+                                <circle cx="40" cy="35" r="2" fill="#713f12"/>
+                                <circle cx="50" cy="25" r="2" fill="#713f12"/>
+                            </g>
+                            <!-- Rice bowl -->
+                            <g transform="translate(100,105)">
+                                <ellipse cx="0" cy="0" rx="30" ry="8" fill="#dc2626"/>
+                                <path d="M-30,0 Q-30,15 0,18 Q30,15 30,0" fill="#dc2626"/>
+                                <ellipse cx="0" cy="-2" rx="26" ry="6" fill="white"/>
+                                <!-- Rice grains -->
+                                <ellipse cx="-8" cy="-3" rx="3" ry="2" fill="#fafafa" stroke="#e5e7eb" stroke-width="0.5"/>
+                                <ellipse cx="2" cy="-4" rx="3" ry="2" fill="#fafafa" stroke="#e5e7eb" stroke-width="0.5"/>
+                                <ellipse cx="10" cy="-2" rx="3" ry="2" fill="#fafafa" stroke="#e5e7eb" stroke-width="0.5"/>
+                                <ellipse cx="-3" cy="-1" rx="3" ry="2" fill="#fafafa" stroke="#e5e7eb" stroke-width="0.5"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">chopstick</span> ）</div>
+                </div>
+            </div>
+            <!-- Word bank -->
+            <div style="text-align:center;background:linear-gradient(135deg,#ecfdf5,#dbeafe);padding:14px 30px;border-radius:16px;border:2px solid #a7f3d0;font-size:1.5rem;font-weight:bold;color:#1e40af;letter-spacing:1px;">
+                ancestor &nbsp;/&nbsp; nut &nbsp;/&nbsp; era &nbsp;/&nbsp; chopstick
+            </div>
+        </div>
+    </div>
+    <style>
+        .kw-card { background:white; border-radius:16px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08); border:2px solid #e5e7eb; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; position:relative; }
+        .kw-card:hover { transform:translateY(-4px); box-shadow:0 6px 20px rgba(0,0,0,0.12); }
+        .kw-num { position:absolute; top:8px; left:8px; width:30px; height:30px; border-radius:50%; color:white; font-size:1.1rem; font-weight:900; display:flex; align-items:center; justify-content:center; z-index:2; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
+        .kw-illust { padding:8px; }
+        .kw-illust svg { width:100%; height:auto; border-radius:10px; }
+        .kw-label { text-align:center; padding:8px 12px 12px; font-size:1.3rem; font-weight:bold; color:#374151; border-top:1px solid #f3f4f6; }
+        .kw-pos { display:inline-block; background:#dbeafe; color:#1e40af; font-size:0.9rem; padding:2px 10px; border-radius:6px; margin-right:4px; font-weight:900; }
+        .kw-answer { color:transparent; border-bottom:3px solid #3b82f6; padding:0 8px; min-width:80px; display:inline-block; text-align:center; transition:color 0.3s; }
+        .kw-answer.kw-show { color:#ef4444 !important; }
+    </style>
+    <!-- Slide 6: Check -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Check</h2>
+        <div id="check-content" class="content-box flex flex-col justify-center space-y-6 text-check border border-orange-100"></div>
+    </div>
+    <!-- Slide 7: Dialogue -->
+    <div class="slide bg-green-50">
+        <h2 class="slide-title text-green-700">Dialogue</h2>
+        <div class="content-box border border-green-100 flex flex-col justify-center space-y-4">
+            <div class="bg-gray-50 p-6 rounded-2xl border-l-8 border-green-500 text-4xl font-bold">
+                A: What <span class="text-red-600 underline decoration-4">did you eat</span> last night?
+            </div>
+            <div class="bg-green-100/50 p-6 rounded-2xl border-l-8 border-blue-500 text-4xl font-bold">
+                B: I ate <span id="target-word" class="text-blue-800">natto</span>.
+            </div>
+            <div id="dialogue-options" class="mt-6 grid grid-cols-3 gap-4"></div>
+        </div>
+    </div>
+    <!-- Slide 8: Quiz Mode -->
+    <div class="slide bg-blue-50">
+        <div class="w-full max-w-6xl flex justify-between items-center mb-4">
+            <h2 class="slide-title text-blue-900 m-0">Quiz Mode</h2>
+            <button onclick="revealAllQuiz()" class="bg-red-500 text-white px-6 py-2 rounded-xl font-bold hover:bg-red-600 shadow-md transition">SHOW ALL ANSWERS</button>
+        </div>
+        <div id="reading-content-quiz" class="content-box border border-blue-100 text-reading"></div>
+    </div>
+    <!-- Slide 9: Phrase Review -->
+    <div class="slide bg-indigo-50">
+        <h2 class="slide-title text-indigo-800">Phrase Review</h2>
+        <div id="translation-content" class="content-box border border-indigo-100 overflow-y-auto"></div>
+    </div>
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 9</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+    <script>
+        let currentSlide = 0;
+        function makeSlashable(container, html) {
+            container.innerHTML = html;
+            const walk = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walk.nextNode()) { textNodes.push(node); }
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                const text = textNode.textContent;
+                const tokens = text.split(/(\s+)/);
+                const fragment = document.createDocumentFragment();
+                tokens.forEach(token => {
+                    if (/\s+/.test(token)) {
+                        const span = document.createElement('span');
+                        span.className = 'slashable-char slashable-space';
+                        span.innerHTML = '&nbsp;';
+                        span.onclick = (e) => { e.stopPropagation(); span.classList.toggle('slash-mark'); };
+                        fragment.appendChild(span);
+                    } else if (token.length > 0) {
+                        const wordWrapper = document.createElement('span');
+                        wordWrapper.className = 'word-wrapper';
+                        token.split('').forEach(char => {
+                            const charSpan = document.createElement('span');
+                            charSpan.className = 'slashable-char';
+                            charSpan.textContent = char;
+                            charSpan.onclick = (e) => { e.stopPropagation(); charSpan.classList.toggle('slash-mark'); };
+                            wordWrapper.appendChild(charSpan);
+                        });
+                        fragment.appendChild(wordWrapper);
+                    }
+                });
+                parent.replaceChild(fragment, textNode);
+            });
+        }
+        function createWordCard(word, containerId) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[200px]";
+            div.onclick = function() { this.querySelector('.ja-text').classList.toggle('opacity-0'); };
+            div.innerHTML = `
+                <p class="text-3xl font-bold mb-4">${word.en}</p>
+                <p class="ja-text text-3xl text-yellow-400 opacity-0 transition-opacity font-bold">${word.ja}</p>
+            `;
+            container.appendChild(div);
+        }
+        function initApp() {
+            document.getElementById('main-title').innerText = SLIDE_DATA.title;
+            document.getElementById('sub-title').innerText = SLIDE_DATA.subtitle;
+            document.getElementById('warmup-q').innerText = SLIDE_DATA.warmup.question;
+            document.getElementById('warmup-a-base').innerText = SLIDE_DATA.warmup.answerBase;
+            const readingStatic = document.getElementById('reading-content-static');
+            readingStatic.innerHTML = '';
+            SLIDE_DATA.reading.forEach(line => {
+                const p = document.createElement('p');
+                p.className = "mb-6";
+                const html = line.replace(/\{([^}]+)\}/g, '<span class="highlight-static">$1</span>');
+                makeSlashable(p, html);
+                readingStatic.appendChild(p);
+            });
+            const readingQuiz = document.getElementById('reading-content-quiz');
+            readingQuiz.innerHTML = '';
+            SLIDE_DATA.reading.forEach(line => {
+                const p = document.createElement('p');
+                p.className = "mb-6";
+                p.innerHTML = line.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                readingQuiz.appendChild(p);
+            });
+            const checkContent = document.getElementById('check-content');
+            checkContent.innerHTML = '';
+            SLIDE_DATA.checks.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-6 rounded-2xl border border-orange-100 w-full";
+                let qHtml = item.q.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                let html = `<p class="font-bold">${qHtml}</p>`;
+                if(item.sub) {
+                    let subHtml = item.sub.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                    html += `<p class="mt-2 ml-10 text-gray-600 font-medium">${subHtml}</p>`;
+                }
+                div.innerHTML = html;
+                checkContent.appendChild(div);
+            });
+            const transContent = document.getElementById('translation-content');
+            transContent.innerHTML = '';
+            SLIDE_DATA.translationPhrases.forEach(phrase => {
+                const card = document.createElement('div');
+                card.className = "phrase-card";
+                card.onclick = () => card.classList.toggle('active');
+                card.innerHTML = `
+                    <div class="phrase-en">${phrase.en}</div>
+                    <div class="phrase-ja">${phrase.ja}</div>
+                `;
+                transContent.appendChild(card);
+            });
+            // word-grid replaced by KEY WORDS slide
+            document.getElementById('new-words-grid').innerHTML = '';
+            SLIDE_DATA.newWords.forEach(word => createWordCard(word, 'new-words-grid'));
+            const optDiv = document.getElementById('dialogue-options');
+            optDiv.innerHTML = '';
+            SLIDE_DATA.dialogue.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "bg-white border-2 border-green-200 p-4 rounded-xl font-bold hover:bg-green-500 hover:text-white transition text-xl shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => document.getElementById('target-word').innerText = opt;
+                optDiv.appendChild(btn);
+            });
+            updateSlideDisplay();
+        }
+        function revealAllQuiz() {
+            const answers = document.querySelectorAll('#reading-content-quiz .hidden-answer');
+            const anyHidden = Array.from(answers).some(a => !a.classList.contains('show'));
+            answers.forEach(a => a.classList.toggle('show', anyHidden));
+        }
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+        function nextSlide() { if (currentSlide < 8) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        window.onload = initApp;
+    </script>
+</body>
+</html>

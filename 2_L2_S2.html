@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: The History of Japanese Food - Section 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 20px 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide.active { display: flex; }
+        .bg-ocean { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&q=80&w=1600') center/cover; }
+
+        .text-reading { font-size: 1.9rem; line-height: 1.8; }
+        .text-check { font-size: 2.1rem; line-height: 1.5; }
+        .word-wrapper { display: inline-block; white-space: nowrap; }
+        .slashable-char {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            padding: 0 1px;
+            transition: background 0.2s;
+        }
+        .slashable-char:hover { background-color: rgba(59, 130, 246, 0.1); }
+        .slashable-space { display: inline-block; min-width: 0.8em; cursor: pointer; }
+        .slash-mark::after {
+            content: "/";
+            color: #ef4444;
+            font-weight: 900;
+            margin-left: 4px;
+            margin-right: 4px;
+            display: inline-block;
+            transform: scale(1.2);
+            pointer-events: none;
+        }
+        .highlight-static {
+            font-weight: normal;
+            color: #1f2937 !important;
+            border-bottom: none !important;
+            padding: 0;
+            margin: 0;
+            display: inline;
+        }
+        .hidden-answer {
+            display: inline-block;
+            color: transparent !important;
+            border-bottom: 3px solid #3b82f6 !important;
+            padding: 0 8px;
+            margin: 0 4px;
+            cursor: pointer;
+            min-width: 120px;
+            text-align: center;
+            vertical-align: baseline;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .hidden-answer.show {
+            color: #ef4444 !important;
+            font-weight: bold;
+        }
+        .phrase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .phrase-card:hover { border-color: #3b82f6; transform: translateX(5px); }
+        .phrase-en { font-size: 1.6rem; font-weight: bold; color: #1f2937; }
+        .phrase-ja { font-size: 1.3rem; color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
+        .phrase-card.active .phrase-ja { opacity: 1; }
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .content-box {
+            height: 600px;
+            width: 100%;
+            max-width: 1152px;
+            overflow-y: auto;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background-color: white;
+        }
+        .check-bracket { color: #3b82f6; font-weight: bold; width: 20px; display: inline-block; text-align: center; }
+    </style>
+</head>
+<body>
+    <script>
+        const SLIDE_DATA = {
+            title: "Lesson 2: The History of Japanese Food",
+            subtitle: "Section 2",
+            warmup: {
+                question: "Do you often cook?",
+                answerBase: "Yes, I do. I like"
+            },
+            reading: [
+                "Soba, sushi, and tempura became popular in the Edo era. Sushi was served at {stalls}.",
+                "{Tuna}, {squid}, and {shrimp} were very popular.",
+                "In the Meiji era, eating {meat} was {permitted}. That changed Japanese food culture.",
+                "In the Taisho era, various foods appeared. People began eating {cutlets}, curry and rice, and omelets. They are {relatively} new foods in the history of Japan."
+            ],
+            translationPhrases: [
+                { en: "Soba, sushi, and tempura became popular in the Edo era.", ja: "江戸時代にそば、寿司、天ぷらが人気になりました。" },
+                { en: "Sushi was served at stalls.", ja: "寿司は屋台で提供されていました。" },
+                { en: "Tuna, squid, and shrimp were very popular.", ja: "マグロ、イカ、エビがとても人気でした。" },
+                { en: "In the Meiji era, eating meat was permitted.", ja: "明治時代には、肉を食べることが許されました。" },
+                { en: "That changed Japanese food culture.", ja: "それが日本の食文化を変えました。" },
+                { en: "In the Taisho era, various foods appeared.", ja: "大正時代には、様々な食べ物が登場しました。" },
+                { en: "People began eating cutlets, curry and rice, and omelets.", ja: "人々はカツレツ、カレーライス、オムレツを食べ始めました。" },
+                { en: "They are relatively new foods in the history of Japan.", ja: "それらは日本の歴史の中では比較的新しい食べ物です。" }
+            ],
+            checks: [
+                { q: "1. When did sushi become popular in Japan?", sub: "— In the <span class='check-bracket'>(</span> {Edo} <span class='check-bracket'>)</span> era." },
+                { q: "2. In the Taisho era, Japanese people began eating <span class='check-bracket'>(</span> {various} <span class='check-bracket'>)</span> and new foods." }
+            ],
+            words: [
+                { en: "stall(s)", ja: "屋台" },
+                { en: "tuna", ja: "マグロ" },
+                { en: "squid", ja: "イカ" },
+                { en: "shrimp", ja: "エビ" },
+                { en: "meat", ja: "肉" },
+                { en: "permit(ted)", ja: "許可する" }
+            ],
+            newWords: [
+                { en: "stall", ja: "屋台（名）" },
+                { en: "tuna", ja: "マグロ（名）" },
+                { en: "squid", ja: "イカ（名）" },
+                { en: "shrimp", ja: "エビ（名）" },
+                { en: "cutlet(s)", ja: "カツレツ（名）" },
+                { en: "relatively", ja: "比較的（副）" }
+            ],
+            dialogue: {
+                target: "curry and rice",
+                options: ["stew", "fried rice", "hamburgers", "Chinese noodles"]
+            }
+        };
+    </script>
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-ocean text-white justify-center text-center">
+        <h1 id="main-title" class="text-9xl font-black mb-8"></h1>
+        <p id="sub-title" class="text-4xl opacity-90"></p>
+    </div>
+    <!-- Slide 2: Warm Up -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-blue-600">Warm-up</h2>
+        <div class="content-box bg-blue-50 border border-blue-100 flex flex-col justify-center space-y-8 text-4xl">
+            <div class="bg-blue-100/50 p-8 rounded-2xl w-full">
+                <p class="text-blue-500 text-sm font-black uppercase mb-2">Teacher</p>
+                <p id="warmup-q" class="font-bold text-gray-800"></p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl w-full border-4 border-dashed border-gray-100">
+                <p class="text-gray-400 text-sm font-black uppercase mb-2">Student</p>
+                <p class="font-bold text-gray-800"><span id="warmup-a-base"></span> ____________________.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Slide 3: Reading Section -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-gray-900">Reading Section</h2>
+        <div id="reading-content-static" class="content-box bg-gray-50 border border-gray-100 text-reading"></div>
+    </div>
+    <!-- Slide 4: New Words -->
+    <div class="slide bg-gray-900 text-white">
+        <h2 class="slide-title text-yellow-400">New Words</h2>
+        <div id="new-words-grid" class="content-box bg-gray-800 border-2 border-gray-700 grid grid-cols-2 md:grid-cols-3 gap-5"></div>
+    </div>
+    <!-- Slide 5: KEY WORDS -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-yellow-600">Key Words</h2>
+        <div class="content-box border border-yellow-200 bg-gradient-to-b from-yellow-50 to-white flex flex-col justify-between" style="padding:1.5rem 2rem;">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5" style="flex:1;">
+                <!-- Card 1: stall -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#ef4444;">&#10102;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fef3c7"/>
+                            <rect y="120" width="200" height="40" fill="#fde68a"/>
+                            <!-- Stall/Yatai -->
+                            <g transform="translate(100,35)">
+                                <!-- Roof -->
+                                <path d="M-55,-5 L0,-20 L55,-5 L50,0 L-50,0 Z" fill="#dc2626"/>
+                                <path d="M-50,0 L50,0 L48,3 L-48,3 Z" fill="#b91c1c"/>
+                                <!-- Noren curtains -->
+                                <rect x="-40" y="3" width="18" height="15" rx="2" fill="#fef3c7" stroke="#dc2626" stroke-width="0.8"/>
+                                <rect x="-18" y="3" width="18" height="15" rx="2" fill="#fef3c7" stroke="#dc2626" stroke-width="0.8"/>
+                                <rect x="4" y="3" width="18" height="15" rx="2" fill="#fef3c7" stroke="#dc2626" stroke-width="0.8"/>
+                                <rect x="26" y="3" width="18" height="15" rx="2" fill="#fef3c7" stroke="#dc2626" stroke-width="0.8"/>
+                                <!-- Counter -->
+                                <rect x="-45" y="20" width="90" height="8" rx="2" fill="#92400e"/>
+                                <!-- Legs -->
+                                <line x1="-40" y1="28" x2="-40" y2="60" stroke="#713f12" stroke-width="3"/>
+                                <line x1="40" y1="28" x2="40" y2="60" stroke="#713f12" stroke-width="3"/>
+                                <!-- Sushi on counter -->
+                                <ellipse cx="-20" cy="18" rx="6" ry="3" fill="#fbbf24"/><ellipse cx="-20" cy="16" rx="5" ry="2" fill="#f87171"/>
+                                <ellipse cx="0" cy="18" rx="6" ry="3" fill="#fbbf24"/><ellipse cx="0" cy="16" rx="5" ry="2" fill="#fb923c"/>
+                                <ellipse cx="20" cy="18" rx="6" ry="3" fill="#fbbf24"/><ellipse cx="20" cy="16" rx="5" ry="2" fill="#f87171"/>
+                                <!-- Lantern -->
+                                <ellipse cx="-50" cy="10" rx="6" ry="9" fill="#fca5a5" stroke="#dc2626" stroke-width="1"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">stall</span> ）</div>
+                </div>
+                <!-- Card 2: tuna -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#f59e0b;">&#10103;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#e0f4ff"/>
+                            <rect y="100" width="200" height="60" fill="url(#tuna-w)"/>
+                            <defs><linearGradient id="tuna-w" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7dd3fc"/><stop offset="100%" stop-color="#0369a1"/></linearGradient></defs>
+                            <!-- Tuna fish -->
+                            <g transform="translate(100,65)">
+                                <ellipse cx="0" cy="0" rx="55" ry="22" fill="#475569"/>
+                                <ellipse cx="0" cy="0" rx="50" ry="18" fill="#64748b"/>
+                                <ellipse cx="0" cy="5" rx="45" ry="12" fill="#94a3b8"/>
+                                <!-- Tail -->
+                                <path d="M50,-5 L70,-20 L70,15 L50,5 Z" fill="#475569"/>
+                                <!-- Eye -->
+                                <circle cx="-35" cy="-3" r="5" fill="white"/><circle cx="-34" cy="-3" r="2.5" fill="#1e293b"/>
+                                <!-- Mouth -->
+                                <path d="M-55,2 Q-50,5 -45,2" stroke="#334155" stroke-width="1.5" fill="none"/>
+                                <!-- Fins -->
+                                <path d="M-10,-18 Q0,-35 10,-18" fill="#475569"/>
+                                <path d="M10,12 Q15,22 25,15" fill="#64748b"/>
+                                <!-- Stripes -->
+                                <line x1="-20" y1="-15" x2="-15" y2="10" stroke="#94a3b8" stroke-width="0.8" opacity="0.5"/>
+                                <line x1="-5" y1="-16" x2="0" y2="12" stroke="#94a3b8" stroke-width="0.8" opacity="0.5"/>
+                                <line x1="15" y1="-14" x2="18" y2="10" stroke="#94a3b8" stroke-width="0.8" opacity="0.5"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">tuna</span> ）</div>
+                </div>
+                <!-- Card 3: shrimp -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#22c55e;">&#10104;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fff1f2"/>
+                            <rect y="120" width="200" height="40" fill="#ffe4e6"/>
+                            <!-- Shrimp -->
+                            <g transform="translate(100,70)">
+                                <!-- Body segments -->
+                                <path d="M-30,-20 Q-10,-35 20,-30 Q40,-25 45,-10 Q48,5 35,15 Q20,25 0,20" fill="#fb923c" stroke="#ea580c" stroke-width="1.5"/>
+                                <path d="M-25,-15 Q-5,-28 18,-24 Q35,-20 38,-8 Q40,3 30,12" fill="#fdba74" stroke="none"/>
+                                <!-- Segments lines -->
+                                <path d="M-10,-28 Q-5,-15 -5,-5" stroke="#ea580c" stroke-width="0.8" fill="none"/>
+                                <path d="M10,-30 Q12,-18 10,-5" stroke="#ea580c" stroke-width="0.8" fill="none"/>
+                                <path d="M28,-24 Q30,-12 25,0" stroke="#ea580c" stroke-width="0.8" fill="none"/>
+                                <!-- Eye -->
+                                <circle cx="-25" cy="-18" r="3" fill="white"/><circle cx="-24" cy="-18" r="1.5" fill="#1e293b"/>
+                                <!-- Antenna -->
+                                <path d="M-30,-22 Q-45,-35 -50,-45" stroke="#ea580c" stroke-width="1.5" fill="none"/>
+                                <path d="M-28,-24 Q-40,-40 -35,-50" stroke="#ea580c" stroke-width="1.5" fill="none"/>
+                                <!-- Tail fan -->
+                                <path d="M0,20 Q-15,30 -10,40" fill="#fb923c"/><path d="M0,20 Q5,32 0,40" fill="#fdba74"/><path d="M0,20 Q15,30 10,40" fill="#fb923c"/>
+                                <!-- Legs -->
+                                <line x1="-15" y1="-5" x2="-25" y2="8" stroke="#ea580c" stroke-width="1"/>
+                                <line x1="-5" y1="0" x2="-15" y2="12" stroke="#ea580c" stroke-width="1"/>
+                                <line x1="5" y1="2" x2="-5" y2="15" stroke="#ea580c" stroke-width="1"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">shrimp</span> ）</div>
+                </div>
+                <!-- Card 4: cutlet -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#8b5cf6;">&#10105;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fefce8"/>
+                            <rect y="120" width="200" height="40" fill="#fef9c3"/>
+                            <!-- Plate -->
+                            <g transform="translate(100,75)">
+                                <ellipse cx="0" cy="15" rx="60" ry="18" fill="#e5e7eb"/>
+                                <ellipse cx="0" cy="13" rx="55" ry="15" fill="#f3f4f6"/>
+                                <ellipse cx="0" cy="12" rx="48" ry="12" fill="white"/>
+                            </g>
+                            <!-- Cutlet -->
+                            <g transform="translate(100,60)">
+                                <ellipse cx="0" cy="0" rx="35" ry="12" fill="#b45309"/>
+                                <ellipse cx="0" cy="-2" rx="33" ry="10" fill="#d97706"/>
+                                <!-- Breadcrumb texture -->
+                                <circle cx="-15" cy="-3" r="1.5" fill="#92400e" opacity="0.4"/>
+                                <circle cx="-5" cy="2" r="1" fill="#92400e" opacity="0.4"/>
+                                <circle cx="8" cy="-4" r="1.5" fill="#92400e" opacity="0.4"/>
+                                <circle cx="18" cy="1" r="1" fill="#92400e" opacity="0.4"/>
+                                <circle cx="-10" cy="4" r="1" fill="#92400e" opacity="0.4"/>
+                                <circle cx="0" cy="-5" r="1.2" fill="#92400e" opacity="0.4"/>
+                                <circle cx="12" cy="3" r="1.2" fill="#92400e" opacity="0.4"/>
+                                <!-- Cut lines -->
+                                <line x1="-12" y1="-8" x2="-12" y2="6" stroke="#92400e" stroke-width="1" opacity="0.5"/>
+                                <line x1="0" y1="-9" x2="0" y2="7" stroke="#92400e" stroke-width="1" opacity="0.5"/>
+                                <line x1="12" y1="-8" x2="12" y2="6" stroke="#92400e" stroke-width="1" opacity="0.5"/>
+                            </g>
+                            <!-- Cabbage -->
+                            <g transform="translate(55,70)">
+                                <ellipse cx="0" cy="0" rx="12" ry="6" fill="#86efac"/>
+                                <ellipse cx="5" cy="-3" rx="8" ry="4" fill="#4ade80"/>
+                            </g>
+                            <!-- Lemon -->
+                            <g transform="translate(148,68)">
+                                <ellipse cx="0" cy="0" rx="8" ry="6" fill="#fde047"/>
+                                <ellipse cx="0" cy="0" rx="5" ry="4" fill="#fef08a"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">cutlet</span> ）</div>
+                </div>
+            </div>
+            <!-- Word bank -->
+            <div style="text-align:center;background:linear-gradient(135deg,#ecfdf5,#dbeafe);padding:14px 30px;border-radius:16px;border:2px solid #a7f3d0;font-size:1.5rem;font-weight:bold;color:#1e40af;letter-spacing:1px;">
+                stall &nbsp;/&nbsp; tuna &nbsp;/&nbsp; shrimp &nbsp;/&nbsp; cutlet
+            </div>
+        </div>
+    </div>
+    <style>
+        .kw-card { background:white; border-radius:16px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08); border:2px solid #e5e7eb; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; position:relative; }
+        .kw-card:hover { transform:translateY(-4px); box-shadow:0 6px 20px rgba(0,0,0,0.12); }
+        .kw-num { position:absolute; top:8px; left:8px; width:30px; height:30px; border-radius:50%; color:white; font-size:1.1rem; font-weight:900; display:flex; align-items:center; justify-content:center; z-index:2; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
+        .kw-illust { padding:8px; }
+        .kw-illust svg { width:100%; height:auto; border-radius:10px; }
+        .kw-label { text-align:center; padding:8px 12px 12px; font-size:1.3rem; font-weight:bold; color:#374151; border-top:1px solid #f3f4f6; }
+        .kw-pos { display:inline-block; background:#dbeafe; color:#1e40af; font-size:0.9rem; padding:2px 10px; border-radius:6px; margin-right:4px; font-weight:900; }
+        .kw-answer { color:transparent; border-bottom:3px solid #3b82f6; padding:0 8px; min-width:80px; display:inline-block; text-align:center; transition:color 0.3s; }
+        .kw-answer.kw-show { color:#ef4444 !important; }
+    </style>
+    <!-- Slide 6: Check -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Check</h2>
+        <div id="check-content" class="content-box flex flex-col justify-center space-y-6 text-check border border-orange-100"></div>
+    </div>
+    <!-- Slide 7: Dialogue -->
+    <div class="slide bg-green-50">
+        <h2 class="slide-title text-green-700">Dialogue</h2>
+        <div class="content-box border border-green-100 flex flex-col justify-center space-y-4">
+            <div class="bg-gray-50 p-6 rounded-2xl border-l-8 border-green-500 text-4xl font-bold">
+                A: What do you <span class="text-red-600 underline decoration-4">cook</span>?
+            </div>
+            <div class="bg-green-100/50 p-6 rounded-2xl border-l-8 border-blue-500 text-4xl font-bold">
+                B: I cook <span id="target-word" class="text-blue-800">curry and rice</span>.
+            </div>
+            <div id="dialogue-options" class="mt-6 grid grid-cols-4 gap-4"></div>
+        </div>
+    </div>
+    <!-- Slide 8: Quiz Mode -->
+    <div class="slide bg-blue-50">
+        <div class="w-full max-w-6xl flex justify-between items-center mb-4">
+            <h2 class="slide-title text-blue-900 m-0">Quiz Mode</h2>
+            <button onclick="revealAllQuiz()" class="bg-red-500 text-white px-6 py-2 rounded-xl font-bold hover:bg-red-600 shadow-md transition">SHOW ALL ANSWERS</button>
+        </div>
+        <div id="reading-content-quiz" class="content-box border border-blue-100 text-reading"></div>
+    </div>
+    <!-- Slide 9: Phrase Review -->
+    <div class="slide bg-indigo-50">
+        <h2 class="slide-title text-indigo-800">Phrase Review</h2>
+        <div id="translation-content" class="content-box border border-indigo-100 overflow-y-auto"></div>
+    </div>
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 9</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+    <script>
+        let currentSlide = 0;
+        function makeSlashable(container, html) {
+            container.innerHTML = html;
+            const walk = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walk.nextNode()) { textNodes.push(node); }
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                const text = textNode.textContent;
+                const tokens = text.split(/(\s+)/);
+                const fragment = document.createDocumentFragment();
+                tokens.forEach(token => {
+                    if (/\s+/.test(token)) {
+                        const span = document.createElement('span');
+                        span.className = 'slashable-char slashable-space';
+                        span.innerHTML = '&nbsp;';
+                        span.onclick = (e) => { e.stopPropagation(); span.classList.toggle('slash-mark'); };
+                        fragment.appendChild(span);
+                    } else if (token.length > 0) {
+                        const wordWrapper = document.createElement('span');
+                        wordWrapper.className = 'word-wrapper';
+                        token.split('').forEach(char => {
+                            const charSpan = document.createElement('span');
+                            charSpan.className = 'slashable-char';
+                            charSpan.textContent = char;
+                            charSpan.onclick = (e) => { e.stopPropagation(); charSpan.classList.toggle('slash-mark'); };
+                            wordWrapper.appendChild(charSpan);
+                        });
+                        fragment.appendChild(wordWrapper);
+                    }
+                });
+                parent.replaceChild(fragment, textNode);
+            });
+        }
+        function createWordCard(word, containerId) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[200px]";
+            div.onclick = function() { this.querySelector('.ja-text').classList.toggle('opacity-0'); };
+            div.innerHTML = `
+                <p class="text-3xl font-bold mb-4">${word.en}</p>
+                <p class="ja-text text-3xl text-yellow-400 opacity-0 transition-opacity font-bold">${word.ja}</p>
+            `;
+            container.appendChild(div);
+        }
+        function initApp() {
+            document.getElementById('main-title').innerText = SLIDE_DATA.title;
+            document.getElementById('sub-title').innerText = SLIDE_DATA.subtitle;
+            document.getElementById('warmup-q').innerText = SLIDE_DATA.warmup.question;
+            document.getElementById('warmup-a-base').innerText = SLIDE_DATA.warmup.answerBase;
+            const readingStatic = document.getElementById('reading-content-static');
+            readingStatic.innerHTML = '';
+            SLIDE_DATA.reading.forEach(line => {
+                const p = document.createElement('p');
+                p.className = "mb-6";
+                const html = line.replace(/\{([^}]+)\}/g, '<span class="highlight-static">$1</span>');
+                makeSlashable(p, html);
+                readingStatic.appendChild(p);
+            });
+            const readingQuiz = document.getElementById('reading-content-quiz');
+            readingQuiz.innerHTML = '';
+            SLIDE_DATA.reading.forEach(line => {
+                const p = document.createElement('p');
+                p.className = "mb-6";
+                p.innerHTML = line.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                readingQuiz.appendChild(p);
+            });
+            const checkContent = document.getElementById('check-content');
+            checkContent.innerHTML = '';
+            SLIDE_DATA.checks.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-6 rounded-2xl border border-orange-100 w-full";
+                let qHtml = item.q.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                let html = `<p class="font-bold">${qHtml}</p>`;
+                if(item.sub) {
+                    let subHtml = item.sub.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                    html += `<p class="mt-2 ml-10 text-gray-600 font-medium">${subHtml}</p>`;
+                }
+                div.innerHTML = html;
+                checkContent.appendChild(div);
+            });
+            const transContent = document.getElementById('translation-content');
+            transContent.innerHTML = '';
+            SLIDE_DATA.translationPhrases.forEach(phrase => {
+                const card = document.createElement('div');
+                card.className = "phrase-card";
+                card.onclick = () => card.classList.toggle('active');
+                card.innerHTML = `
+                    <div class="phrase-en">${phrase.en}</div>
+                    <div class="phrase-ja">${phrase.ja}</div>
+                `;
+                transContent.appendChild(card);
+            });
+            // word-grid replaced by KEY WORDS slide
+            document.getElementById('new-words-grid').innerHTML = '';
+            SLIDE_DATA.newWords.forEach(word => createWordCard(word, 'new-words-grid'));
+            const optDiv = document.getElementById('dialogue-options');
+            optDiv.innerHTML = '';
+            SLIDE_DATA.dialogue.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "bg-white border-2 border-green-200 p-4 rounded-xl font-bold hover:bg-green-500 hover:text-white transition text-xl shadow-sm";
+                btn.innerText = opt;
+                btn.onclick = () => document.getElementById('target-word').innerText = opt;
+                optDiv.appendChild(btn);
+            });
+            updateSlideDisplay();
+        }
+        function revealAllQuiz() {
+            const answers = document.querySelectorAll('#reading-content-quiz .hidden-answer');
+            const anyHidden = Array.from(answers).some(a => !a.classList.contains('show'));
+            answers.forEach(a => a.classList.toggle('show', anyHidden));
+        }
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+        function nextSlide() { if (currentSlide < 8) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+        window.onload = initApp;
+    </script>
+</body>
+</html>
