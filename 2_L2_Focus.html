@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: The History of Japanese Food - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 20px 40px; flex-direction: column; align-items: center; }
+        .slide.active { display: flex; }
+        .bg-food { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&q=80&w=1600') center/cover; }
+        .slide-title { font-size: 3rem; font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .content-box { height: 600px; width: 100%; max-width: 1152px; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #dc2626 !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 120px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
+        .hidden-answer.show { color: #dc2626 !important; font-weight: bold; }
+        .example-sentence { font-size: 2rem; line-height: 1.6; margin-bottom: 0.5rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: 1.3rem; color: #6b7280; margin-bottom: 1.5rem; }
+        .keyword { color: #dc2626; font-weight: 900; }
+        .grammar-box { background: #fff1f2; border-left: 6px solid #dc2626; padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 1.5rem; font-size: 1.3rem; line-height: 1.8; }
+        .try-q { font-size: 1.8rem; line-height: 1.6; margin-bottom: 0.3rem; font-weight: bold; }
+        .try-ja { font-size: 1.2rem; color: #6b7280; margin-bottom: 1.2rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 12px 20px; background: #fef3c7; border-radius: 12px; margin-bottom: 1.5rem; }
+        .word-bank span { font-size: 1.4rem; font-weight: bold; color: #92400e; }
+        .usage-row { display: grid; grid-template-columns: 200px 1fr; border-bottom: 1px solid #e5e7eb; padding: 0.9rem 0; align-items: start; gap: 1rem; }
+        .usage-label { font-size: 1.1rem; color: #b91c1c; font-weight: bold; background: #fee2e2; border-radius: 8px; padding: 4px 10px; text-align: center; margin-top: 4px; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-food text-white justify-center text-center">
+        <h1 class="text-7xl font-black mb-8 leading-tight">Lesson 2: The History of<br>Japanese Food</h1>
+        <p class="text-4xl opacity-90">Focus & Try</p>
+    </div>
+
+    <!-- Slide 2: Focus 1 - 過去形 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-red-600">Focus 1</h2>
+        <div class="content-box bg-red-50 border border-red-100">
+            <p class="text-xl font-black text-red-700 mb-4">「〜でした」「〜しました」　be動詞・一般動詞の過去形の復習</p>
+
+            <p class="example-sentence">Japanese ancestors mainly <span class="keyword">had</span> nuts, seafood, and wild animals.</p>
+            <p class="example-ja">日本人の祖先は、主に木の実や海産物や野生の動物を食べていました。</p>
+
+            <p class="example-sentence">Tuna, squid, and shrimp <span class="keyword">were</span> very popular.</p>
+            <p class="example-ja">マグロやイカ、エビはとても人気がありました。</p>
+
+            <div class="grammar-box">
+                <p><strong>be動詞の過去形</strong>：am → was　／　is → was　／　are → were</p>
+                <p><strong>一般動詞の過去形</strong>：動詞の原形に -(e)d をつけるか、動詞を不規則変化させて表す。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus 2 - 動名詞 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-red-600">Focus 2</h2>
+        <div class="content-box bg-red-50 border border-red-100">
+            <p class="text-xl font-black text-red-700 mb-4">「〜すること」　動名詞の復習</p>
+
+            <p class="example-sentence">In the Meiji era, <span class="keyword">eating</span> meat was permitted.</p>
+            <p class="example-ja">明治時代には、肉を食べることが許されました。</p>
+
+            <div class="grammar-box">
+                <p>動詞の <strong>ing形</strong> で「〜すること」という意味を表し、名詞と同じような働きをします。</p>
+            </div>
+
+            <div style="border-top: 1px solid #e5e7eb;">
+                <div class="usage-row">
+                    <div class="usage-label">主語になる動名詞</div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-800"><span class="keyword">Eating</span> breakfast is very important.</p>
+                        <p class="text-lg text-gray-500">朝食を食べることは非常に重要です。</p>
+                    </div>
+                </div>
+                <div class="usage-row">
+                    <div class="usage-label">補語になる動名詞</div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-800">My hobby is <span class="keyword">drawing</span> portraits.</p>
+                        <p class="text-lg text-gray-500">私の趣味は似顔絵を描くことです。</p>
+                    </div>
+                </div>
+                <div class="usage-row" style="border-bottom:none;">
+                    <div class="usage-label">目的語になる動名詞</div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-800">I stopped <span class="keyword">playing</span> games.</p>
+                        <p class="text-lg text-gray-500">私はゲームをすることをやめました。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: TRY 1 - 過去形変換 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語を過去形にしましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① I ( buy → <span class="hidden-answer" onclick="this.classList.toggle('show')">bought</span> ) a fashionable T-shirt yesterday.</p>
+                <p class="try-ja">私は昨日、おしゃれなTシャツを買いました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② I ( meet → <span class="hidden-answer" onclick="this.classList.toggle('show')">met</span> ) Ryan on the street.</p>
+                <p class="try-ja">私は道でライアンに会いました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ He ( wear → <span class="hidden-answer" onclick="this.classList.toggle('show')">wore</span> ) the same T-shirt as I.</p>
+                <p class="try-ja">彼は私と同じTシャツを着ていました。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: TRY 2 - 語句選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>chopsticks</span><span>/</span><span>squid</span><span>/</span><span>mainly</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① Emma ( <span class="hidden-answer" onclick="this.classList.toggle('show')">mainly</span> ) eats Japanese food every day.</p>
+                <p class="try-ja">エマは毎日、主に日本食を食べています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② She eats meals with ( <span class="hidden-answer" onclick="this.classList.toggle('show')">chopsticks</span> ).</p>
+                <p class="try-ja">彼女はおはしで食事をします。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ She can eat ( <span class="hidden-answer" onclick="this.classList.toggle('show')">squid</span> ) <em>sashimi</em> very well.</p>
+                <p class="try-ja">彼女はイカのお刺身をとても上手に食べることができます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: TRY 3 - 語句選択（受動態） -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語句を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>is served</span><span>/</span><span>is forbidden</span><span>/</span><span>is permitted</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① Eating pork ( <span class="hidden-answer" onclick="this.classList.toggle('show')">is forbidden</span> ) in Islam.</p>
+                <p class="try-ja">イスラム教では、豚肉を食べることは禁止されています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② But eating beef ( <span class="hidden-answer" onclick="this.classList.toggle('show')">is permitted</span> ).</p>
+                <p class="try-ja">しかし牛肉を食べることは許されています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ In such countries, lamb ( <span class="hidden-answer" onclick="this.classList.toggle('show')">is served</span> ) at meals very often.</p>
+                <p class="try-ja">そのような国では、食事によく羊肉が出されます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
