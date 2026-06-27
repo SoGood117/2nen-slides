@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Gacha-gacha - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 20px 16px 80px; flex-direction: column; align-items: center; }
+        .slide.active { display: flex; }
+        .bg-gacha {
+            background: linear-gradient(rgba(0,0,0,0.42), rgba(0,0,0,0.42)),
+                linear-gradient(135deg, #84cc16 0%, #ec4899 55%, #8b5cf6 100%);
+        }
+        .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #3b82f6 !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 100px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
+        .hidden-answer.show { color: #ef4444 !important; font-weight: bold; }
+        .example-sentence { font-size: 2.4rem; line-height: 1.6; margin-bottom: 0.5rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: 1.7rem; color: #6b7280; margin-bottom: 1.5rem; }
+        .keyword { color: #ef4444; font-weight: 900; }
+        .grammar-box { background: #f0f9ff; border-left: 6px solid #3b82f6; padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 1.2rem; font-size: 2.0rem; line-height: 1.8; }
+        .svxx-table { width: 100%; border-collapse: collapse; font-size: 1.7rem; margin-top: 0.8rem; }
+        .svxx-table th { background: #1e40af; color: white; padding: 10px 12px; text-align: center; font-weight: 900; font-size: 1.3rem; }
+        .svxx-table td { border: 1px solid #dbeafe; padding: 10px 12px; text-align: center; font-weight: bold; }
+        .svxx-table tr:nth-child(even) td { background: #eff6ff; }
+        .svxx-table .o1 { color: #2563eb; }
+        .svxx-table .o2 { color: #16a34a; }
+        .svxx-table .cc { color: #db2777; }
+        .svxx-ja { font-size: 1.3rem; color: #6b7280; text-align: center; margin-top: 6px; }
+        .try-q { font-size: 2.4rem; line-height: 1.7; margin-bottom: 0.2rem; font-weight: bold; }
+        .try-ja { font-size: 1.7rem; color: #6b7280; margin-bottom: 1.3rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 12px 20px; background: #fef3c7; border-radius: 12px; margin-bottom: 1.5rem; }
+        .word-bank span { font-size: 2.0rem; font-weight: bold; color: #92400e; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-gacha text-white justify-center text-center">
+        <h1 class="text-8xl font-black mb-8">Lesson 4: Gacha-gacha</h1>
+        <p class="text-4xl opacity-90">Focus &amp; Try &mdash; SVOO・SVOC</p>
+    </div>
+
+    <!-- Slide 2: Focus ① SVOO -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-teal-600">Focus ①</h2>
+        <div class="content-box bg-teal-50 border border-teal-100">
+            <p class="text-xl font-black text-teal-700 mb-4">「O（人）にO（もの）を〜する」　SVOO の文</p>
+
+            <p class="example-sentence">They give <span class="keyword">their friends</span> <span class="keyword">capsule toys</span> as souvenirs.</p>
+            <p class="example-ja">彼らはしばしば友だちにカプセルトイをお土産としてあげます。</p>
+
+            <div class="grammar-box">
+                目的語（O）が<strong>2つ</strong>続く文。「<strong>O（人）にO（もの）を〜する</strong>」などの意味を表します。
+            </div>
+
+            <table class="svxx-table">
+                <thead>
+                    <tr><th>S（主語）</th><th>V（動詞）</th><th>O（人）</th><th>O（もの）</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Mr. Takano</td><td>taught</td><td class="o1">us</td><td class="o2">some life lessons.</td></tr>
+                </tbody>
+            </table>
+            <p class="svxx-ja">高野先生は私たちに人生の教訓を教えてくれました。</p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus ② SVOC -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-teal-600">Focus ②</h2>
+        <div class="content-box bg-teal-50 border border-teal-100" style="padding:2rem;">
+            <p class="text-xl font-black text-teal-700 mb-3">「OをCに〜する」「OをCと〜する」　SVOC の文</p>
+
+            <p class="example-sentence" style="font-size:2.1rem;">Capsule toys make <span class="keyword">foreign tourists</span> <span class="keyword">excited</span>.</p>
+            <p class="example-ja" style="margin-bottom:0.6rem;">カプセルトイは外国人旅行客を興奮させます。</p>
+
+            <p class="example-sentence" style="font-size:2.1rem;">We call <span class="keyword">capsule toy machines</span> <span class="keyword">gacha-gacha</span>.</p>
+            <p class="example-ja" style="margin-bottom:0.8rem;">私たちはカプセルトイの機械をガチャガチャと呼びます。</p>
+
+            <div class="grammar-box" style="margin-bottom:0.8rem;">
+                目的語（O）と，それを説明する補語（C）が続く文。<strong>O ＝ C</strong> の関係が成り立ちます。
+            </div>
+
+            <table class="svxx-table">
+                <thead>
+                    <tr><th>S（主語）</th><th>V（動詞）</th><th>O（目的語）</th><th>C（補語）</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Rina</td><td>found</td><td class="o1">bubble tea</td><td class="cc">delicious.</td></tr>
+                </tbody>
+            </table>
+            <p class="svxx-ja">里奈はタピオカティーがおいしいとわかりました。（bubble tea ＝ delicious）</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Try 1 - 並べかえ -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように，（ ）内の語句を並べかえましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① Hiroshi ( <span class="hidden-answer" onclick="this.classList.toggle('show')">gave me a ticket</span> ) for the figure skating competition.</p>
+                <p class="try-ja">　[ me / a ticket / gave ]　広司は私にフィギュアスケートの大会のチケットをくれました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② Their performances ( <span class="hidden-answer" onclick="this.classList.toggle('show')">made me excited</span> ).</p>
+                <p class="try-ja">　[ excited / made / me ]　選手たちの演技に私は興奮しました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I ( <span class="hidden-answer" onclick="this.classList.toggle('show')">found figure skating artistic</span> ).</p>
+                <p class="try-ja">　[ artistic / found / figure skating ]　私は，フィギュアスケートが芸術的だとわかりました。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Try 2 - 語選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-3">日本語に合うように，最も適する語を下から選んで（ ）に入れましょう。</p>
+            <div class="word-bank mb-5">
+                <span>souvenirs</span><span>/</span><span>international</span><span>/</span><span>tourists</span>
+            </div>
+
+            <div class="mb-5">
+                <p class="try-q">① There are a lot of stores in the ( <span class="hidden-answer" onclick="this.classList.toggle('show')">international</span> ) airport.</p>
+                <p class="try-ja">その国際空港にはたくさんのお店があります。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">② Many ( <span class="hidden-answer" onclick="this.classList.toggle('show')">tourists</span> ) enjoy shopping in the stores.</p>
+                <p class="try-ja">多くの旅行客がそのお店でショッピングを楽しみます。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">③ They often buy their ( <span class="hidden-answer" onclick="this.classList.toggle('show')">souvenirs</span> ) there.</p>
+                <p class="try-ja">彼らはよくそこでお土産を買います。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Try 3 - 復習・発展 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3 <span class="text-base align-middle bg-pink-200 text-pink-800 px-2 py-1 rounded">復習・発展</span></h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-3">日本語に合うように，最も適する語句を下から選んで（ ）に入れましょう。</p>
+            <div class="word-bank mb-5">
+                <span>to symbolize</span><span>/</span><span>but also</span><span>/</span><span>is located</span>
+            </div>
+
+            <div class="mb-5">
+                <p class="try-q">① The statue of "Billiken" ( <span class="hidden-answer" onclick="this.classList.toggle('show')">is located</span> ) in Tsutenkaku Tower in Osaka.</p>
+                <p class="try-ja">「ビリケンさん」の像は大阪の通天閣にあります。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">② It is a statue ( <span class="hidden-answer" onclick="this.classList.toggle('show')">to symbolize</span> ) good luck.</p>
+                <p class="try-ja">それは幸運を象徴する像です。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">③ It is not only funny ( <span class="hidden-answer" onclick="this.classList.toggle('show')">but also</span> ) artistic.</p>
+                <p class="try-ja">それはおもしろいだけではなく，芸術的でもあります。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); });
+    </script>
+</body>
+</html>
