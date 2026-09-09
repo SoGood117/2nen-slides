@@ -8,13 +8,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
         body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
-        .slide { display: none; height: 100vh; width: 100vw; padding: 20px 16px 80px; flex-direction: column; align-items: center; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 4vh 4vw 84px; flex-direction: column; align-items: center; }
         .slide.active { display: flex; }
         .bg-gacha {
             background: linear-gradient(rgba(0,0,0,0.42), rgba(0,0,0,0.42)),
                 linear-gradient(135deg, #84cc16 0%, #ec4899 55%, #8b5cf6 100%);
         }
-        .text-reading { font-size: clamp(1.4rem, 3vh, 2.4rem); line-height: 1.8; text-align: center; }
+        .text-reading { font-size: clamp(1.35rem, 2.9vh, 2.3rem); line-height: 1.5; text-align: center; }
         .word-wrapper { display: inline-block; white-space: nowrap; }
         .slashable-char { display: inline-block; cursor: pointer; position: relative; padding: 0 1px; transition: background 0.2s; }
         .slashable-char:hover { background-color: rgba(59,130,246,0.1); }
@@ -29,7 +29,7 @@
         .phrase-ja { font-size: clamp(1.0rem, 2.1vh, 1.7rem); color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
         .phrase-card.active .phrase-ja { opacity: 1; }
         .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
-        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 1.5rem 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
         .check-bracket { color: #3b82f6; font-weight: bold; width: 20px; display: inline-block; text-align: center; }
         .tts-panel { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; background: linear-gradient(135deg,#eff6ff,#f0fdf4); border: 2px solid #93c5fd; border-radius: 16px; padding: 12px 20px; margin-bottom: 14px; width: 100%; max-width: 100%; box-shadow: 0 2px 8px rgba(59,130,246,0.1); }
         .tts-section { display: flex; align-items: center; gap: 10px; }
@@ -51,9 +51,9 @@
         .kw-num { position:absolute; top:8px; left:8px; width:30px; height:30px; border-radius:50%; color:white; font-size:1.1rem; font-weight:900; display:flex; align-items:center; justify-content:center; z-index:2; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
         .kw-illust { padding:8px; }
         .kw-illust svg { width:100%; height:auto; border-radius:10px; }
-        .kw-label { text-align:center; padding:8px 12px 12px; font-size:1.7rem; font-weight:bold; color:#374151; border-top:1px solid #f3f4f6; }
+        .kw-label { text-align:center; padding:8px 10px 12px; font-size:1.6rem; font-weight:bold; color:#374151; border-top:1px solid #f3f4f6; white-space:nowrap; }
         .kw-pos { display:inline-block; background:#dbeafe; color:#1e40af; font-size:1.1rem; padding:2px 10px; border-radius:6px; margin-right:4px; font-weight:900; }
-        .kw-answer { color:transparent; border-bottom:3px solid #3b82f6; padding:0 8px; min-width:80px; display:inline-block; text-align:center; transition:color 0.3s; }
+        .kw-answer { color:transparent; border-bottom:3px solid #3b82f6; padding:0 6px; min-width:56px; display:inline-block; text-align:center; transition:color 0.3s; }
         .kw-answer.kw-show { color:#ef4444 !important; }
     </style>
 </head>
@@ -419,9 +419,9 @@
         function createWordCard(word, containerId) {
             const container = document.getElementById(containerId);
             const div = document.createElement('div');
-            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[180px]";
+            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[150px]";
             div.onclick = function() { this.querySelector('.ja-text').classList.toggle('opacity-0'); };
-            div.innerHTML = `<p class="text-3xl font-bold mb-4">${word.en}</p><p class="ja-text text-2xl text-yellow-400 opacity-0 transition-opacity font-bold">${word.ja}</p>`;
+            div.innerHTML = `<p class="text-3xl font-bold mb-2">${word.en}</p><p class="ja-text text-2xl text-yellow-400 opacity-0 transition-opacity font-bold">${word.ja}</p>`;
             container.appendChild(div);
         }
         function initApp() {
@@ -499,6 +499,61 @@
         function nextSlide() { const total = document.querySelectorAll('.slide').length; if (currentSlide < total - 1) { currentSlide++; updateSlideDisplay(); } }
         function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
         document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); });
+        // --- 自動フィット: 枠/カード群があふれる時だけ、収まる倍率に中身を縮める ---
+        function fitOne(box, avail){
+            let wrap = box.querySelector(':scope > .fit-wrap');
+            if(!wrap){
+                const isGrid = box.classList.contains('grid');
+                wrap = document.createElement('div');
+                wrap.className = 'fit-wrap';
+                wrap.style.width = '100%';
+                wrap.style.transformOrigin = 'top center';
+                if(isGrid){
+                    let cols = 1, gap = '1.25rem';
+                    box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                    box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                    wrap.style.display = 'grid';
+                    wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                    wrap.style.gap = gap;
+                    [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                    box.style.display = 'block';
+                } else {
+                    [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                }
+                while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                box.appendChild(wrap);
+            }
+            wrap.style.transform = 'none';
+            const need = wrap.scrollHeight;
+            if(need > avail - 1 && need > 0){
+                wrap.style.transform = 'scale(' + (avail / need) + ')';
+                return true;
+            }
+            return false;
+        }
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            const nav = document.querySelector('.fixed.bottom-6, .fixed.bottom-4');
+            const navTop = nav ? nav.getBoundingClientRect().top : window.innerHeight;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0, pb = parseFloat(cs.paddingBottom) || 0;
+                const shrank = fitOne(box, box.clientHeight - pt - pb);
+                if(!box.classList.contains('grid')) box.style.justifyContent = shrank ? 'flex-start' : '';
+            });
+            s.querySelectorAll('.w-full.max-w-6xl').forEach(cont=>{
+                const r = cont.getBoundingClientRect();
+                fitOne(cont, (navTop - 12) - r.top);
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
+
         window.onload = initApp;
     </script>
 </body>

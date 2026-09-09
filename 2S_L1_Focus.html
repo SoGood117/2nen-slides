@@ -13,7 +13,7 @@
             display: none;
             height: 100vh;
             width: 100vw;
-            padding: 20px 16px 80px;
+            padding: 4vh 4vw 84px;
             flex-direction: column;
             align-items: center;
         }
@@ -32,7 +32,7 @@
             max-width: 100%;
             overflow-y: auto;
             border-radius: 1.5rem;
-            padding: 2.5rem;
+            padding: 1.5rem 2rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             background-color: white;
         }
@@ -251,6 +251,62 @@
         }
         function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
         function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        // --- 自動フィット: 枠/カード群があふれる時だけ、収まる倍率に中身を縮める ---
+        function fitOne(box, avail){
+            let wrap = box.querySelector(':scope > .fit-wrap');
+            if(!wrap){
+                const isGrid = box.classList.contains('grid');
+                wrap = document.createElement('div');
+                wrap.className = 'fit-wrap';
+                wrap.style.width = '100%';
+                wrap.style.transformOrigin = 'top center';
+                if(isGrid){
+                    let cols = 1, gap = '1.25rem';
+                    box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                    box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                    wrap.style.display = 'grid';
+                    wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                    wrap.style.gap = gap;
+                    [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                    box.style.display = 'block';
+                } else {
+                    [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                }
+                while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                box.appendChild(wrap);
+            }
+            wrap.style.transform = 'none';
+            const need = wrap.scrollHeight;
+            if(need > avail - 1 && need > 0){
+                wrap.style.transform = 'scale(' + (avail / need) + ')';
+                return true;
+            }
+            return false;
+        }
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            const nav = document.querySelector('.fixed.bottom-6, .fixed.bottom-4');
+            const navTop = nav ? nav.getBoundingClientRect().top : window.innerHeight;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0, pb = parseFloat(cs.paddingBottom) || 0;
+                const shrank = fitOne(box, box.clientHeight - pt - pb);
+                if(!box.classList.contains('grid')) box.style.justifyContent = shrank ? 'flex-start' : '';
+            });
+            s.querySelectorAll('.w-full.max-w-6xl').forEach(cont=>{
+                const r = cont.getBoundingClientRect();
+                fitOne(cont, (navTop - 12) - r.top);
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('load', () => requestAnimationFrame(fitActiveSlide));
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
