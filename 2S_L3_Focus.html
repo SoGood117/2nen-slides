@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Volunteer Work - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 4vh 4vw 84px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide.active { display: flex; }
+        .bg-ocean { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1544918877-4648b260029b?auto=format&fit=crop&q=80&w=1600') center/cover; }
+
+        .slide-title {
+            font-size: clamp(2.0rem, 4.5vh, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .content-box {
+            flex: 1;
+            width: 100%;
+            max-width: 100%;
+            overflow-y: auto;
+            border-radius: 1.5rem;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background-color: white;
+        }
+        .hidden-answer {
+            display: inline-block;
+            color: transparent !important;
+            border-bottom: 3px solid #3b82f6 !important;
+            padding: 0 8px;
+            margin: 0 4px;
+            cursor: pointer;
+            min-width: 100px;
+            text-align: center;
+            vertical-align: baseline;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .hidden-answer.show {
+            color: #ef4444 !important;
+            font-weight: bold;
+        }
+        .example-sentence {
+            font-size: 2.4rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+        .example-ja {
+            font-size: 1.7rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        .keyword {
+            color: #ef4444;
+            font-weight: 900;
+        }
+        .grammar-box {
+            background: #f0f9ff;
+            border-left: 6px solid #3b82f6;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 1.5rem;
+            font-size: 2.0rem;
+            line-height: 1.8;
+        }
+        .try-q {
+            font-size: 2.4rem;
+            line-height: 1.6;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+        .try-ja {
+            font-size: 1.7rem;
+            color: #6b7280;
+            margin-bottom: 1.2rem;
+        }
+        .word-bank {
+            display: inline-flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 12px 20px;
+            background: #fef3c7;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .word-bank span {
+            font-size: 2.0rem;
+            font-weight: bold;
+            color: #92400e;
+        }
+        .modal-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 4px;
+        }
+        .focus-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+        .focus-table td { padding: 10px 14px; border: 1px solid #bae6fd; vertical-align: top; }
+        .focus-table .label-cell { font-size: 1.2rem; color: #0369a1; font-weight: bold; background: #f0f9ff; width: 240px; }
+        .focus-table .ex-en { font-size: 1.9rem; font-weight: bold; color:#1f2937; }
+        .focus-table .ex-ja { font-size: 1.35rem; color: #6b7280; margin-top: 2px; }
+        .transform-box { background:#f0fdf4; border:2px solid #86efac; border-radius:12px; padding:14px 20px; font-size:1.8rem; font-weight:bold; color:#1f2937; margin-bottom:0.6rem; }
+        .transform-arrow { text-align:center; color:#16a34a; font-size:1.6rem; font-weight:900; margin:2px 0; }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide active text-white justify-center text-center" style="background:linear-gradient(135deg,#065f46,#059669,#34d399);">
+        <h1 class="text-8xl font-black mb-8">Lesson 3: Volunteer Work</h1>
+        <p class="text-4xl opacity-90">Focus & Try</p>
+    </div>
+
+    <!-- Slide 2: Focus 1 - 不定詞の復習 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-teal-600">Focus 1</h2>
+        <div class="content-box bg-teal-50 border border-teal-100">
+            <p class="text-xl font-black text-teal-700 mb-4">「～すること」「～するために」「～するための」　不定詞の復習</p>
+
+            <p class="example-sentence">High school students have an ability <span class="keyword">to change</span> the world.</p>
+            <p class="example-ja">高校生には、世界を変える力があります。</p>
+
+            <div class="grammar-box">
+                &lt;to＋動詞の原形&gt; の形で、次のような意味を表します。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <td class="label-cell">名詞的用法<br><span style="font-weight:normal;font-size:0.95rem;">（～すること）</span></td>
+                    <td><p class="ex-en">I like <span class="keyword">to play</span> tennis with my friends.</p><p class="ex-ja">私は友だちとテニスをすることが好きです。</p></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">副詞的用法<br><span style="font-weight:normal;font-size:0.95rem;">（～するために・～して）</span></td>
+                    <td><p class="ex-en">I was excited <span class="keyword">to meet</span> the singer.</p><p class="ex-ja">私はその歌手に会って興奮しました。</p></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">形容詞的用法<br><span style="font-weight:normal;font-size:0.95rem;">（～するための）</span></td>
+                    <td><p class="ex-en">I need time <span class="keyword">to clean</span> my room.</p><p class="ex-ja">私には部屋を掃除するための時間が必要です。</p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus 2 - 受動態の復習 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-teal-600">Focus 2</h2>
+        <div class="content-box bg-teal-50 border border-teal-100">
+            <p class="text-xl font-black text-teal-700 mb-4">「～される」　受動態の復習</p>
+
+            <p class="example-sentence">Her dancing <span class="keyword">is watched</span> online.</p>
+            <p class="example-ja">彼女の踊りはオンラインで見られています。</p>
+
+            <div class="grammar-box">
+                &lt;be動詞＋動詞の過去分詞形&gt; の形で、「（主語が）～される」という意味を表します。
+            </div>
+
+            <div class="transform-box">Isao <span class="keyword">took</span> this beautiful picture.<br><span style="font-size:1.3rem;color:#6b7280;font-weight:normal;">勇夫はこの美しい写真を撮りました。</span></div>
+            <div class="transform-arrow">↓</div>
+            <div class="transform-box">This beautiful picture <span class="keyword">was taken</span> by Isao.<br><span style="font-size:1.3rem;color:#6b7280;font-weight:normal;">この美しい写真は勇夫によって撮られました。</span></div>
+        </div>
+    </div>
+
+    <!-- Slide 4: TRY 1 - 不定詞 並べかえ -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、（　）内の語を並べかえましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① I like ( travel / to / in ) foreign countries.</p>
+                <p class="try-q" style="margin-top:8px;">→ I like <span class="hidden-answer" onclick="this.classList.toggle('show')">to travel in</span> foreign countries.</p>
+                <p class="try-ja">私は海外を旅行するのが好きです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② I need ( to / money / go ) abroad.</p>
+                <p class="try-q" style="margin-top:8px;">→ I need <span class="hidden-answer" onclick="this.classList.toggle('show')">money to go</span> abroad.</p>
+                <p class="try-ja">私は海外に行くためのお金が必要です。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I'm working hard ( save / money / to ).</p>
+                <p class="try-q" style="margin-top:8px;">→ I'm working hard <span class="hidden-answer" onclick="this.classList.toggle('show')">to save money</span>.</p>
+                <p class="try-ja">私はお金を貯めるために一生懸命働いています。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: TRY 2 - 適語選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>enthusiastic</span><span>/</span><span>annual</span><span>/</span><span>generation</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① Kawachi Ondo Festival is an ( <span class="hidden-answer" onclick="this.classList.toggle('show')">annual</span> ) event in Osaka.</p>
+                <p class="try-ja">河内音頭祭りは大阪で毎年恒例のイベントです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② The elders hand down the dance to the next ( <span class="hidden-answer" onclick="this.classList.toggle('show')">generation</span> ).</p>
+                <p class="try-ja">年長者たちはその踊りを次の世代に伝えます。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ Young people are also ( <span class="hidden-answer" onclick="this.classList.toggle('show')">enthusiastic</span> ) about learning the dance.</p>
+                <p class="try-ja">若者たちも熱心にその踊りを学んでいます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: TRY 3 - 復習・発展 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語句を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>made efforts</span><span>/</span><span>impressed with</span><span>/</span><span>sympathized with</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① Emma ( <span class="hidden-answer" onclick="this.classList.toggle('show')">made efforts</span> ) to hold a concert for foreign students.</p>
+                <p class="try-ja">エマは留学生のためにコンサートを開こうと努力しました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② They ( <span class="hidden-answer" onclick="this.classList.toggle('show')">sympathized with</span> ) her ideas.</p>
+                <p class="try-ja">彼らはエマの考えに共感しました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ They were ( <span class="hidden-answer" onclick="this.classList.toggle('show')">impressed with</span> ) the concert.</p>
+                <p class="try-ja">彼らはそのコンサートに感銘を受けました。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        // --- 自動フィット: 枠/カード群があふれる時だけ、収まる倍率に中身を縮める ---
+        function fitOne(box, avail){
+            let wrap = box.querySelector(':scope > .fit-wrap');
+            if(!wrap){
+                const isGrid = box.classList.contains('grid');
+                wrap = document.createElement('div');
+                wrap.className = 'fit-wrap';
+                wrap.style.width = '100%';
+                wrap.style.transformOrigin = 'top center';
+                if(isGrid){
+                    let cols = 1, gap = '1.25rem';
+                    box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                    box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                    wrap.style.display = 'grid';
+                    wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                    wrap.style.gap = gap;
+                    [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                    box.style.display = 'block';
+                } else {
+                    [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                }
+                while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                box.appendChild(wrap);
+            }
+            wrap.style.transform = 'none';
+            const need = wrap.scrollHeight;
+            if(need > avail - 1 && need > 0){
+                wrap.style.transform = 'scale(' + (avail / need) + ')';
+                return true;
+            }
+            return false;
+        }
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            const nav = document.querySelector('.fixed.bottom-6, .fixed.bottom-4');
+            const navTop = nav ? nav.getBoundingClientRect().top : window.innerHeight;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0, pb = parseFloat(cs.paddingBottom) || 0;
+                const shrank = fitOne(box, box.clientHeight - pt - pb);
+                if(!box.classList.contains('grid')) box.style.justifyContent = shrank ? 'flex-start' : '';
+            });
+            s.querySelectorAll('.w-full.max-w-6xl').forEach(cont=>{
+                const r = cont.getBoundingClientRect();
+                fitOne(cont, (navTop - 12) - r.top);
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('load', () => requestAnimationFrame(fitActiveSlide));
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
