@@ -21,6 +21,16 @@
         .bg-ocean { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1544918877-4648b260029b?auto=format&fit=crop&q=80&w=1600') center/cover; }
 
         .text-reading { font-size: clamp(1.35rem, 2.9vh, 2.3rem); line-height: 1.5; text-align: center; }
+        /* 本文を教科書のように左そろえ・横幅そろえにして左右の余白を均等にする */
+        #reading-content-static p,
+        #reading-content-tts p,
+        #reading-content-quiz p {
+            max-width: 44ch;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            margin-bottom: 0.55em;
+        }
         .text-check { font-size: clamp(1.5rem, 3.2vh, 2.6rem); line-height: 1.5; text-align: center; }
         .word-wrapper { display: inline-block; white-space: nowrap; }
         .slashable-char {
