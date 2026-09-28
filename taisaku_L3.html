@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>L3 対策 解説</title>
+<style>
+  :root{--ink:#1f2937;--sub:#6b7280;--green:#15803d;--amber:#f59e0b;--red:#dc2626;--card:#fff;--bg:#f1f5f9;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,"Meiryo",sans-serif;padding:24px 16px 60px;}
+  .wrap{max-width:1000px;margin:0 auto;}
+  .title{text-align:center;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;color:#b45309;margin:0 0 4px;}
+  .subtitle{text-align:center;color:var(--sub);font-size:1rem;margin:0 0 20px;}
+  .bar{display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap;}
+  .btn{border:none;background:var(--amber);color:#fff;font-weight:800;font-size:1rem;padding:8px 18px;border-radius:12px;cursor:pointer;transition:.15s;}
+  .btn:hover{filter:brightness(1.05);}
+  .btn.ghost{background:#fff;color:var(--ink);border:2px solid #e5e7eb;}
+  .part-head{font-size:1.5rem;font-weight:900;color:#0f766e;margin:26px 0 10px;padding-left:12px;border-left:8px solid #14b8a6;}
+  .card{background:var(--card);border-radius:16px;padding:22px 26px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid #e5e7eb;}
+  .card h2{margin:0 0 12px;font-size:1.2rem;color:var(--green);}
+  .hint{color:var(--sub);font-size:.92rem;margin:0 0 12px;}
+  .para{font-size:clamp(1.2rem,2.5vw,1.6rem);line-height:2.0;}
+  .num{color:var(--sub);font-weight:900;margin-right:2px;}
+  .chip{border-bottom:3px dotted var(--amber);cursor:pointer;padding:0 2px;border-radius:4px;transition:background .15s;}
+  .chip:hover{background:#fff7ed;}
+  .chip .ja{display:none;color:var(--green);font-weight:800;font-size:.72em;margin-left:6px;white-space:nowrap;}
+  .chip.on .ja{display:inline;}
+  .chip.on{background:#f0fdf4;border-bottom-color:var(--green);}
+  .box{border:2px solid #64748b;border-radius:6px;padding:0 6px;}
+  .blank{color:#b45309;font-weight:800;cursor:pointer;padding:0 2px;border-radius:4px;}
+  .blank:hover{background:#fff7ed;}
+  .blank .ja{display:none;color:var(--green);margin-left:4px;}
+  .blank.on .ja{display:inline;}
+  .qa{border-left:6px solid var(--amber);padding:6px 0 6px 16px;margin:12px 0;}
+  .q{font-weight:800;font-size:1.1rem;margin-bottom:6px;}
+  .qbody{font-size:1.05rem;color:var(--ink);margin:2px 0 6px;line-height:1.7;}
+  .a{display:none;color:var(--green);font-weight:800;font-size:1.1rem;}
+  .qa.on .a{display:block;}
+  .qa.on{border-left-color:var(--green);}
+  .a .why{display:block;color:var(--sub);font-weight:600;font-size:.92rem;margin-top:3px;}
+  .tap{color:var(--sub);font-size:.82rem;margin-left:8px;}
+  .note{color:#b45309;font-size:.85rem;}
+  .st{color:var(--red);text-decoration:underline;font-weight:900;}
+  .item{cursor:pointer;padding:5px 8px;border-radius:8px;margin:3px 0;font-size:1.05rem;line-height:1.6;transition:background .15s;}
+  .item:hover{background:#f1f5f9;}
+  .item.on{background:#f0fdf4;}
+  .item .mk{display:none;color:var(--green);font-weight:800;}
+  .item.on .mk{display:inline;}
+  .witem{display:inline-block;cursor:pointer;padding:2px 8px;margin:3px 2px;border-radius:8px;font-size:1.15rem;transition:background .15s;}
+  .witem:hover{background:#f1f5f9;}
+  .witem.on{background:#f0fdf4;}
+  .witem.on .acc{color:var(--red);text-decoration:underline;font-weight:900;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="title">Lesson 3　対策　解説</h1>
+  <p class="subtitle">2学年 英語　2学期中間考査 対策プリント　Part 1 &amp; Part 2</p>
+  <div class="bar">
+    <button class="btn" onclick="setAll(true)">すべての解答を表示</button>
+    <button class="btn ghost" onclick="setAll(false)">すべて隠す</button>
+  </div>
+
+  <!-- ===================== PART 1 ===================== -->
+  <div class="part-head">Part 1　（さだまさしとボランティア）</div>
+  <div class="card">
+    <h2>本文</h2>
+    <p class="hint">🟠 点線の語句をタップすると意味が出ます。</p>
+    <div class="para">
+      <span class="num">①</span>There are many people <span class="chip" onclick="this.classList.toggle('on')">in need<span class="ja">困っている・助けを必要とする</span></span> around the world.
+      <span class="num">②</span>Sada Masashi does volunteer work <span class="chip" onclick="this.classList.toggle('on')">at various places<span class="ja">さまざまな場所で</span></span>.
+      <span class="num">③</span>He <span class="chip" onclick="this.classList.toggle('on')">is impressed with<span class="ja">〜に感銘を受ける</span></span> <span class="chip" onclick="this.classList.toggle('on')">enthusiastic<span class="ja">熱心な</span></span> student volunteers.
+      <span class="num">④</span>His <span class="chip" onclick="this.classList.toggle('on')">foundation<span class="ja">財団</span></span> holds its annual awards event to support student volunteers.
+      <span class="num">⑤</span>He said, "High school students have <span class="chip" onclick="this.classList.toggle('on')">an ability to change the world<span class="ja">世界を変える能力</span></span>.
+      <span class="num">⑥</span>The student volunteers <span class="chip" onclick="this.classList.toggle('on')">sympathize with<span class="ja">〜に共感する</span></span> each other and <span class="chip" onclick="this.classList.toggle('on')">build profound friendship<span class="ja">深い友情を築く</span></span>."
+    </div>
+  </div>
+  <div class="card">
+    <h2>設問の解答</h2>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問1　下線部の意味</div><div class="a">in need＝困っている・助けを必要とする／ at various places＝さまざまな場所で／ is impressed with＝〜に感銘を受ける／ enthusiastic＝熱心な／ foundation＝財団／ an ability to change the world＝世界を変える能力／ sympathize with＝〜に共感する／ build profound friendship＝深い友情を築く</div></div>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問2　財団が賞のイベントを開催している理由（日本語）</div><div class="a">学生ボランティアを支援するため。</div></div>
+    <div class="qa"><div class="q">問3　本文の内容に合う＝T／合わない＝F<span class="tap">（各文をクリックで解答）</span></div>
+      <div class="item" onclick="this.classList.toggle('on')">(a) There are many people in need in various countries.<span class="mk"> … <b>T</b>（①「世界中に」と一致）</span></div>
+      <div class="item" onclick="this.classList.toggle('on')">(b) Sada Masashi's foundation changed the world.<span class="mk"> … <b>F</b>（財団は「支援している」だけ。世界を変えたとは述べていない）</span></div>
+    </div>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問4　What does Sada Masashi's foundation hold every year?（（　）に語）</div><div class="a">It holds the annual （ <b>awards</b> ） event to （ <b>support</b> ） student volunteers.</div></div>
+    <div class="qa"><div class="q">問5　最も強く読む部分<span class="tap">（各語をクリックで解答）</span></div>
+      <div class="qbody">
+        <span class="witem" onclick="this.classList.toggle('on')">vol・un・<span class="acc">teer</span></span>
+        <span class="witem" onclick="this.classList.toggle('on')">foun・<span class="acc">da</span>・tion</span>
+        <span class="witem" onclick="this.classList.toggle('on')">a・<span class="acc">bil</span>・i・ty</span>
+        <span class="witem" onclick="this.classList.toggle('on')"><span class="acc">ef</span>・fort</span>
+        <span class="witem" onclick="this.classList.toggle('on')">im・<span class="acc">press</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PART 2 ===================== -->
+  <div class="part-head">Part 2　（白石踊りを守る）</div>
+  <div class="card">
+    <h2>本文</h2>
+    <p class="hint">🟠 点線の語句 / □this □the crisis をタップすると意味・内容が出ます。</p>
+    <div class="para">
+      <span class="num">①</span>Shiraishi-odori is a <span class="chip" onclick="this.classList.toggle('on')">traditional<span class="ja">伝統的な</span></span> dance in Shiraishi Island.
+      <span class="num">②</span>It is about to <span class="chip" onclick="this.classList.toggle('on')">become extinct<span class="ja">絶滅する・消滅する</span></span>.
+      <span class="num">③</span>When some students found out about <span class="chip box" onclick="this.classList.toggle('on')">this<span class="ja">白石踊りが絶滅の危機にあること</span></span>, they <span class="chip" onclick="this.classList.toggle('on')">took action<span class="ja">行動を起こした</span></span> to <span class="chip" onclick="this.classList.toggle('on')">get over<span class="ja">乗り越える</span></span> <span class="chip box" onclick="this.classList.toggle('on')">the crisis<span class="ja">危機</span></span>.
+      <span class="num">④</span>They danced at various places and asked for <span class="chip" onclick="this.classList.toggle('on')">donations<span class="ja">寄付</span></span>.
+      <span class="num">⑤</span>They also created a <span class="chip" onclick="this.classList.toggle('on')">virtual<span class="ja">仮想の・バーチャルの</span></span> idol, Shiraishi Mai.
+      <span class="num">⑥</span>Her dancing is watched <span class="chip" onclick="this.classList.toggle('on')">online<span class="ja">オンラインで</span></span>.
+      <span class="num">⑦</span>In this way, they are <span class="chip" onclick="this.classList.toggle('on')">making efforts<span class="ja">努力している</span></span> to <span class="chip" onclick="this.classList.toggle('on')">hand down<span class="ja">受け継ぐ・伝える</span></span> this dance to the next <span class="chip" onclick="this.classList.toggle('on')">generation<span class="ja">世代</span></span>.
+    </div>
+  </div>
+  <div class="card">
+    <h2>設問の解答</h2>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問1　下線部の意味</div><div class="a">traditional＝伝統的な／ become extinct＝絶滅する／ took action＝行動を起こした／ get over＝乗り越える／ donations＝寄付／ virtual＝仮想の（バーチャルの）／ online＝オンラインで／ making efforts＝努力している／ hand down＝受け継ぐ・伝える／ generation＝世代</div></div>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問2　this の指す内容（日本語）</div><div class="a">白石踊りが絶滅の危機にある（絶滅しかけている）こと。</div></div>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問3　危機を乗り越えるために生徒が起こした行動を2つ（日本語）</div><div class="a">・さまざまな場所で踊った　　・寄付を呼びかけた（募った）<span class="why">（＋バーチャルアイドル「白石舞」を作った、も可）</span></div></div>
+    <div class="qa"><div class="q">問4　本文の内容に合う＝T／合わない＝F<span class="tap">（各文をクリックで解答）</span></div>
+      <div class="item" onclick="this.classList.toggle('on')">(a) Shiraishi-odori is a new dance in Shiraishi Island.<span class="mk"> … <b>F</b>（① traditional＝伝統的な踊り）</span></div>
+      <div class="item" onclick="this.classList.toggle('on')">(b) Shiraishi Mai's dancing is watched online.<span class="mk"> … <b>T</b>（⑥ と一致）</span></div>
+    </div>
+    <div class="qa" onclick="this.classList.toggle('on')"><div class="q">問7　What did the students do for Shiraishi-odori?（（　）に語）</div><div class="a">They （ <b>made</b> ） （ <b>efforts</b> ） to save it.</div></div>
+  </div>
+</div>
+<script>
+  function setAll(on){document.querySelectorAll('.chip,.blank,.qa,.item,.witem').forEach(function(el){el.classList.toggle('on',on);});}
+</script>
+</body>
+</html>
