@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willing p.28-33 解説</title>
+<style>
+:root{
+  --bg:#1f2a37; --paper:#fffdf8; --ink:#1f2937; --sub:#6b7280;
+  --accent:#2563eb; --accent2:#dc2626; --ok:#047857; --soft:#eef4ff; --line:#e5e7eb; --hl:#fff3b0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden;
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);border-radius:14px;padding:48px 64px 56px;
+  display:none;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.slide.active{display:flex}
+.tag{display:inline-block;font-size:18px;font-weight:700;color:#fff;background:var(--accent);padding:4px 14px;border-radius:999px;margin-bottom:10px;align-self:flex-start}
+h1{font-size:60px;line-height:1.25}
+h2{font-size:38px;margin-bottom:6px}
+.lead{font-size:22px;color:var(--sub);margin-bottom:22px}
+.qs{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
+.q{font-size:25px;line-height:1.4;padding:7px 16px;border-left:6px solid var(--line);cursor:pointer;border-radius:6px;transition:background .2s}
+.q:hover{background:#f7f7f7}
+.q .ja{font-size:18px;color:var(--sub);margin-left:12px}
+.q .no{font-weight:700;color:var(--accent);margin-right:8px}
+.ans{display:none;margin-top:2px;font-size:25px}
+.ans b{color:var(--accent2)}
+.ans .why{font-size:18px;color:var(--ok);margin-left:14px}
+.q.open{border-left-color:var(--accent2);background:#fff7f7}
+.q.open .ans{display:block}
+.blank{display:inline-block;min-width:130px;border-bottom:3px solid var(--ink);text-align:center}
+.q.open .blank{color:var(--accent2);font-weight:700;border-bottom-color:var(--accent2)}
+.q .blank .fill{visibility:hidden}
+.q.open .blank .fill{visibility:visible}
+table{border-collapse:collapse;width:100%;font-size:26px}
+th,td{border:2px solid var(--line);padding:12px 16px;text-align:left}
+th{background:var(--soft);color:var(--accent)}
+.box{background:var(--soft);border-radius:12px;padding:20px 26px;font-size:26px;line-height:1.7;margin-bottom:16px}
+.box.red{background:#fff1f1}
+.mk{background:var(--hl);padding:0 4px;border-radius:4px;font-weight:700}
+.arrow{color:var(--accent2);font-weight:700}
+.cols{display:flex;gap:24px}
+.cols>div{flex:1}
+.title-slide{justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fffdf8 60%,#e0ecff)}
+.title-slide .menu{margin-top:30px;font-size:24px;line-height:1.9;color:var(--sub)}
+.foot{position:absolute;bottom:18px;right:28px;font-size:16px;color:var(--sub)}
+.hint{position:absolute;bottom:18px;left:64px;font-size:16px;color:#9ca3af}
+#nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+#nav button{font-size:15px;padding:8px 14px;border:none;border-radius:8px;background:rgba(255,255,255,.88);color:#111;cursor:pointer}
+#nav button:hover{background:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 タイトル -->
+<section class="slide title-slide">
+  <span class="tag">問題集 Willing p.28〜33</span>
+  <h1>いろいろな疑問詞<br>／形容詞・副詞の位置</h1>
+  <div class="menu">
+    ① How ＋ 〇〇 の疑問文（p.28）<br>
+    ② 復習問題②：過去形・疑問文・並べかえ（p.30）<br>
+    ③ 形容詞の入る位置（p.32 Try 1）<br>
+    ④ 副詞の入る位置（p.33 Try 2）
+  </div>
+  <div class="hint">→ / スペース で進む　問題をタップで答え表示</div>
+</section>
+
+<!-- 2 How まとめ -->
+<section class="slide">
+  <span class="tag">p.28 Get Ready</span>
+  <h2>How ＋ 〇〇 で「どれくらい？」をたずねる</h2>
+  <p class="lead">「何を」たずねたいかで、How の後ろが変わる！</p>
+  <table>
+    <tr><th>表現</th><th>たずねること</th><th>答え方の例</th></tr>
+    <tr><td><b>How many</b> ＋ 複数名詞</td><td>数（いくつ・何人）</td><td>Two.</td></tr>
+    <tr><td><b>How much</b></td><td>値段・量</td><td>15,000 yen.</td></tr>
+    <tr><td><b>How long</b></td><td>期間・時間の長さ</td><td>About three hours.</td></tr>
+    <tr><td><b>How old</b></td><td>年齢・古さ</td><td>He is ten.</td></tr>
+    <tr><td><b>How often</b></td><td>頻度（何回くらい）</td><td>Once a week.</td></tr>
+  </table>
+  <div class="foot">2</div>
+</section>
+
+<!-- 3 Practice A -->
+<section class="slide">
+  <span class="tag">p.28 Practice A</span>
+  <h2>適切な語句を選ぼう</h2>
+  <div class="qs">
+    <div class="q"><span class="no">(3)</span>( How often / How long ) did you stay in Okinawa?
+      <span class="ja">沖縄にどれくらいいたのですか。</span>
+      <div class="ans">→ <b>How long</b><span class="why">「どれくらいの期間いたか」＝長さ。How often は「何回」なのでNG。</span></div></div>
+    <div class="q"><span class="no">(4)</span>( How many / How much ) books did you read last week?
+      <span class="ja">先週、何冊の本を読みましたか。</span>
+      <div class="ans">→ <b>How many</b><span class="why">books は数えられる名詞の複数形 → 数をたずねる How many。</span></div></div>
+  </div>
+  <div class="foot">3</div>
+</section>
+
+<!-- 4 Practice B -->
+<section class="slide">
+  <span class="tag">p.28 Practice B</span>
+  <h2>下線部に入る語句は？</h2>
+  <p class="lead">How many / How much / How long / How old / How often　<small>※答えの文がヒント！</small></p>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span><span class="blank"><span class="fill">How long</span></span> does it take from here to Osaka? — About three hours.
+      <div class="ans"><span class="why">「3時間くらい」＝所要時間 → How long</span></div></div>
+    <div class="q"><span class="no">(2)</span><span class="blank"><span class="fill">How old</span></span> is Nobita? — He is ten.
+      <div class="ans"><span class="why">「10歳」＝年齢 → How old</span></div></div>
+    <div class="q"><span class="no">(3)</span><span class="blank"><span class="fill">How much</span></span> was your bike? — 15,000 yen.
+      <div class="ans"><span class="why">「15,000円」＝値段 → How much</span></div></div>
+    <div class="q"><span class="no">(4)</span><span class="blank"><span class="fill">How many</span></span> sisters do you have? — Two.
+      <div class="ans"><span class="why">sisters（複数形）の数 → How many</span></div></div>
+    <div class="q"><span class="no">(5)</span><span class="blank"><span class="fill">How often</span></span> do you clean your room? — Once a week.
+      <div class="ans"><span class="why">「週に1回」＝頻度 → How often</span></div></div>
+  </div>
+  <div class="foot">4</div>
+</section>
+
+<!-- 5 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.28 チャレンジ問題</span>
+  <h2>並べかえよう</h2>
+  <div class="box">語順の型：<span class="mk">How ＋ 〇〇</span>（＋名詞）＋ <span class="mk">do / does / did</span> ＋ 主語 ＋ 動詞の原形 …？</div>
+  <div class="qs">
+    <div class="q"><span class="no">(3)</span>昨日、何時間授業がありましたか。<br>( have / did you / how / classes / many ) yesterday?
+      <div class="ans">→ <b>How many classes did you have</b> yesterday?<span class="why">How many の直後に名詞 classes をくっつけるのがポイント！</span></div></div>
+    <div class="q"><span class="no">(4)</span>どれくらいの頻度で歯医者に行きますか。<br>( go to the dentist / often / do / how / you )?
+      <div class="ans">→ <b>How often do you go to the dentist?</b><span class="why">How often ＋ do you ＋ 動詞の原形（go）</span></div></div>
+  </div>
+  <div class="foot">5</div>
+</section>
+
+<!-- 6 復習ポイント -->
+<section class="slide">
+  <span class="tag">p.30 復習問題②</span>
+  <h2>まず確認！ be動詞 と 一般動詞</h2>
+  <div class="cols" style="margin-top:14px">
+    <div class="box">
+      <b>be動詞</b>（am / is / are / was / were）<br>
+      「〜です」「〜にいる」<br>
+      否定：<span class="mk">wasn't / weren't</span><br>
+      疑問：<span class="mk">Was / Were</span> ＋ 主語 …？
+    </div>
+    <div class="box red">
+      <b>一般動詞</b>（play, watch, go …）<br>
+      「〜する」<br>
+      否定：<span class="mk">didn't</span> ＋ 原形<br>
+      疑問：<span class="mk">Did</span> ＋ 主語 ＋ 原形 …？
+    </div>
+  </div>
+  <div class="box" style="margin-top:6px">⚠ 1文に <b>be動詞</b> と <b>do/does/did</b> は同時に使わない！<br>
+  ⚠ 主語が3人称単数・現在なら動詞に <b>-s</b>（例：Who <b>uses</b> …?）</div>
+  <div class="foot">6</div>
+</section>
+
+<!-- 7 復習① -->
+<section class="slide">
+  <span class="tag">p.30 復習問題② ①</span>
+  <h2>適切な語句を選ぼう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>I ( am / was / were ) a junior high school student at that time.
+      <div class="ans">→ <b>was</b><span class="why">at that time（そのとき）＝過去。主語 I の過去は was。</span></div></div>
+    <div class="q"><span class="no">(2)</span>Where ( is / do / does ) your mother now?
+      <div class="ans">→ <b>is</b><span class="why">「今どこにいる？」動詞がない文なので be動詞。now ＝現在、your mother は単数 → is。</span></div></div>
+    <div class="q"><span class="no">(3)</span>Betty ( wasn't / doesn't / didn't ) practice the piano the day before yesterday.
+      <div class="ans">→ <b>didn't</b><span class="why">一般動詞 practice の否定＋おととい（過去）→ didn't ＋原形。</span></div></div>
+    <div class="q"><span class="no">(4)</span>( Do / Did / Are ) you watch the TV drama last night?
+      <div class="ans">→ <b>Did</b><span class="why">一般動詞 watch ＋ last night（過去）→ Did。</span></div></div>
+    <div class="q"><span class="no">(5)</span>Who ( use / uses / is ) this bike?
+      <div class="ans">→ <b>uses</b><span class="why">疑問詞 Who が主語 → 3人称単数扱い → uses。</span></div></div>
+  </div>
+  <div class="foot">7</div>
+</section>
+
+<!-- 8 復習③ -->
+<section class="slide">
+  <span class="tag">p.30 復習問題② ③</span>
+  <h2>並べかえよう</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>ぼくたちは昨日の午後、カラオケに行きました。<br>( karaoke / we / yesterday afternoon / went to ).
+      <div class="ans">→ <b>We went to karaoke yesterday afternoon.</b><span class="why">主語 → 動詞 → 場所 → 時（時を表す語は文末）</span></div></div>
+    <div class="q"><span class="no">(2)</span>あなたはそのとき台所にいましたか。<br>( you / then / in the kitchen / were )?
+      <div class="ans">→ <b>Were you in the kitchen then?</b><span class="why">be動詞の疑問文：Were ＋ 主語 … ／「場所 → 時」の順</span></div></div>
+    <div class="q"><span class="no">(3)</span>あなたの父は毎週日曜日に、車を洗いますか。<br>( your father / wash / does / the car ) every Sunday?
+      <div class="ans">→ <b>Does your father wash the car</b> every Sunday?<span class="why">3人称単数・現在 → Does ＋ 主語 ＋ 原形（wash）</span></div></div>
+    <div class="q"><span class="no">(4)</span>あなたは本を何冊持っていますか。<br>( you / many / do / how / books ) have?
+      <div class="ans">→ <b>How many books do you</b> have?<span class="why">How many ＋ 名詞 をカタマリで文頭へ！</span></div></div>
+  </div>
+  <div class="foot">8</div>
+</section>
+
+<!-- 9 形容詞ポイント -->
+<section class="slide">
+  <span class="tag">p.32 Try 1</span>
+  <h2>形容詞はどこに入る？</h2>
+  <p class="lead">形容詞＝名詞を説明することば（long, good, red, hot …）</p>
+  <div class="box"><b>パターン①　名詞の前</b><br>
+    a / the / my / this ＋ <span class="mk">形容詞</span> ＋ 名詞<br>
+    例）This is a <span class="mk">long</span> story.　これは長い物語です。</div>
+  <div class="box red"><b>パターン②　be動詞の後ろ</b>（主語を説明）<br>
+    主語 ＋ be動詞 ＋ <span class="mk">形容詞</span><br>
+    例）It is <span class="mk">hot</span>.　暑い。　／　She is <span class="mk">busy</span>.</div>
+  <div class="foot">9</div>
+</section>
+
+<!-- 10 Try1 -->
+<section class="slide">
+  <span class="tag">p.32 Try 1</span>
+  <h2>( )内の形容詞を入れよう</h2>
+  <div class="qs" style="gap:4px">
+    <div class="q"><span class="no">(1)</span>She is my friend. (good)<span class="ja">彼女は私の親友です。</span>
+      <div class="ans">→ She is my <b>good</b> friend.<span class="why">my と friend の間（パターン①）</span></div></div>
+    <div class="q"><span class="no">(2)</span>We have the pen. (same)<span class="ja">私たちは同じペンを持っています。</span>
+      <div class="ans">→ We have the <b>same</b> pen.<span class="why">same はふつう the same ＋ 名詞 の形で使う</span></div></div>
+    <div class="q"><span class="no">(3)</span>I like this rose. (red)<span class="ja">私はこの赤いバラが好きです。</span>
+      <div class="ans">→ I like this <b>red</b> rose.<span class="why">this と rose の間（パターン①）</span></div></div>
+    <div class="q"><span class="no">(4)</span>It is in summer. (hot)<span class="ja">夏は暑い。</span>
+      <div class="ans">→ It is <b>hot</b> in summer.<span class="why">be動詞の後ろ（パターン②）。寒暖の It。</span></div></div>
+    <div class="q"><span class="no">(5)</span>Did you have snow last year? (much)<span class="ja">昨年は雪がたくさんふりましたか。</span>
+      <div class="ans">→ Did you have <b>much</b> snow last year?<span class="why">snow は数えられない名詞 → much ＋ 名詞</span></div></div>
+  </div>
+  <div class="foot">10</div>
+</section>
+
+<!-- 11 副詞ポイント -->
+<section class="slide">
+  <span class="tag">p.33 Try 2</span>
+  <h2>副詞はどこに入る？</h2>
+  <p class="lead">副詞＝動詞・形容詞・他の副詞を説明することば</p>
+  <table>
+    <tr><th>種類</th><th>位置</th><th>例</th></tr>
+    <tr><td>様子（well, fast …）</td><td>動詞（＋目的語）の<b>後ろ</b></td><td>speaks English <span class="mk">well</span></td></tr>
+    <tr><td>頻度（always, usually …）</td><td><b>be動詞の後ろ</b><br>／<b>一般動詞の前</b></td><td>is <span class="mk">always</span> busy<br><span class="mk">usually</span> get up</td></tr>
+    <tr><td>程度（very …）</td><td>説明する形容詞・副詞の<b>前</b></td><td><span class="mk">very</span> fast</td></tr>
+  </table>
+  <div class="box red" style="margin-top:16px">頻度副詞の合言葉：<b>「be の後、一般動詞の前」</b></div>
+  <div class="foot">11</div>
+</section>
+
+<!-- 12 Try2 -->
+<section class="slide">
+  <span class="tag">p.33 Try 2</span>
+  <h2>( )内の副詞を入れよう</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>He speaks English. (well)<span class="ja">彼は英語を上手に話します。</span>
+      <div class="ans">→ He speaks English <b>well</b>.<span class="why">様子の副詞は「動詞＋目的語」の後ろ。✕ speaks well English</span></div></div>
+    <div class="q"><span class="no">(2)</span>She is busy. (always)<span class="ja">彼女はいつも忙しい。</span>
+      <div class="ans">→ She is <b>always</b> busy.<span class="why">頻度の副詞 → be動詞の後ろ</span></div></div>
+    <div class="q"><span class="no">(3)</span>Rina walks fast. (very)<span class="ja">里奈はとても速く歩きます。</span>
+      <div class="ans">→ Rina walks <b>very</b> fast.<span class="why">very は fast（副詞）を強める → fast の前</span></div></div>
+    <div class="q"><span class="no">(4)</span>I get up at seven. (usually)<span class="ja">私はたいてい7時に起きます。</span>
+      <div class="ans">→ I <b>usually</b> get up at seven.<span class="why">頻度の副詞 → 一般動詞の前</span></div></div>
+  </div>
+  <div class="foot">12</div>
+</section>
+
+<!-- 13 まとめ -->
+<section class="slide">
+  <span class="tag">まとめ</span>
+  <h2>今日のポイント 3つ</h2>
+  <div class="qs" style="gap:18px">
+    <div class="box">① <b>How ＋ 〇〇</b>：答えから「何をたずねているか」を逆算！<br>
+      　数 many ／ 値段 much ／ 長さ long ／ 年齢 old ／ 頻度 often</div>
+    <div class="box">② <b>be動詞か一般動詞か</b>を見分けてから、was/were か did を選ぶ</div>
+    <div class="box red">③ 形容詞は <b>名詞の前 or be動詞の後</b>　／　頻度副詞は <b>be の後・一般動詞の前</b></div>
+  </div>
+  <div class="foot">13</div>
+</section>
+
+</div>
+
+<div id="nav">
+  <button onclick="go(-1)">◀ 前</button>
+  <button onclick="revealAll()">答えを全部</button>
+  <button onclick="hideAll()">隠す</button>
+  <button onclick="fs()">全画面</button>
+  <button onclick="go(1)">次 ▶</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].classList.add('active');}
+function go(d){show(cur+d);}
+function qs(){return [...slides[cur].querySelectorAll('.q')];}
+function step(){const h=qs().find(q=>!q.classList.contains('open'));if(h)h.classList.add('open');else go(1);}
+function revealAll(){qs().forEach(q=>q.classList.add('open'));}
+function hideAll(){qs().forEach(q=>q.classList.remove('open'));}
+function fs(){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}catch(e){}}
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',e=>{e.stopPropagation();q.classList.toggle('open');}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  else if(e.key===' '||e.key==='Enter'){e.preventDefault();step();}
+  else if(e.key==='a')revealAll();
+  else if(e.key==='f')fs();
+});
+let sx=null;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?1:-1);sx=null;});
+function fit(){const s=Math.min(innerWidth/1300,(innerHeight-50)/740);document.getElementById('stage').style.transform=`translate(-50%,-50%) translate(0,-18px) scale(${s})`;}
+addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>
