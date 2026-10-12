@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Interesting Aquariums - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 4vh 2.5vw 84px; flex-direction: column; align-items: center; }
+        .slide.active { display: flex; }
+        .bg-stage { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #10b981 100%); }
+        .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 1.5rem 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #ea580c !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 120px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
+        .hidden-answer.show { color: #ea580c !important; font-weight: bold; }
+        .example-sentence { font-size: clamp(1.4rem, 2.9vh, 2.2rem); line-height: 1.4; margin-bottom: 0.4rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: clamp(1.05rem, 2.1vh, 1.6rem); color: #6b7280; margin-bottom: 0.7rem; }
+        .keyword { color: #ea580c; font-weight: 900; }
+        .grammar-box { background: #fff7ed; border-left: 6px solid #ea580c; padding: 0.9rem 1.3rem; border-radius: 0 12px 12px 0; margin-bottom: 0.8rem; font-size: clamp(1.2rem, 2.5vh, 1.9rem); line-height: 1.5; }
+        .try-q { font-size: clamp(1.4rem, 2.9vh, 2.2rem); line-height: 1.4; margin-bottom: 0.3rem; font-weight: bold; }
+        .try-ja { font-size: clamp(1.05rem, 2.1vh, 1.6rem); color: #6b7280; margin-bottom: 0.7rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 10px 18px; background: #fef3c7; border-radius: 12px; margin-bottom: 1rem; }
+        .word-bank span { font-size: clamp(1.3rem, 2.4vh, 1.9rem); font-weight: bold; color: #92400e; }
+        .eq-box { background:#eff6ff; border:2px solid #bfdbfe; border-radius:14px; padding:1rem 1.3rem; margin-top:0.6rem; }
+        .it-chip { background:#2563eb; color:white; font-weight:900; padding:2px 12px; border-radius:8px; }
+        .to-chip { background:#dbeafe; color:#1e3a8a; font-weight:900; padding:2px 10px; border-radius:8px; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-stage text-white justify-center text-center">
+        <h1 class="text-7xl font-black mb-8 leading-tight">Lesson 5: Interesting Aquariums</h1>
+        <p class="text-4xl opacity-90">Focus &amp; Try</p>
+    </div>
+
+    <!-- Slide 2: Focus 1 - 形式主語 it -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 1</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「〜することは…だ」　形式主語 it</p>
+
+            <p class="example-sentence"><span class="keyword">It</span> is important <span class="keyword">to inform</span> people of the ecology of living things.</p>
+            <p class="example-ja">生き物たちの生態を人々に知らせることは重要です。</p>
+
+            <p class="example-sentence"><span class="keyword">It</span> is very nostalgic and amazing <span class="keyword">to see</span> many fish in the school.</p>
+            <p class="example-ja">学校でたくさんの魚を見ることは、とても懐かしく驚きもあります。</p>
+
+            <div class="grammar-box">
+                この <strong>it</strong> は <strong>to＋動詞の原形</strong> に続く内容を指す「形式主語」です。<strong>「それは」とは訳しません。</strong>
+            </div>
+
+            <div class="eq-box">
+                <p style="font-size:clamp(1.3rem,2.6vh,2.0rem);font-weight:bold;color:#1f2937;">
+                    <span class="it-chip">It</span> is important for students <span class="to-chip">to do their best</span>.
+                </p>
+                <p class="example-ja" style="margin-top:4px;">生徒たちにとって最善を尽くすことは重要です。（for ... は意味上の主語）</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus 2 - 形式目的語 it -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 2</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「〜することを…だと」　形式目的語 it</p>
+
+            <p class="example-sentence">Visitors find <span class="keyword">it</span> comforting <span class="keyword">to see</span> the jellyfish.</p>
+            <p class="example-ja">来場者たちは、クラゲを見ることはなぐさめになるとわかります。</p>
+
+            <div class="grammar-box">
+                この <strong>it</strong> は <strong>to＋動詞の原形</strong> に続く内容を指す「形式目的語」です。<br>
+                〈 動詞 ＋ <strong>it</strong> ＋ 形容詞 ＋ <strong>to do</strong> 〉の形。<strong>「それは」とは訳しません。</strong>
+            </div>
+
+            <div class="eq-box">
+                <p style="font-size:clamp(1.3rem,2.6vh,2.0rem);font-weight:bold;color:#1f2937;">
+                    Many people think <span class="it-chip">it</span> healthy <span class="to-chip">to drink soy milk</span>.
+                </p>
+                <p class="example-ja" style="margin-top:4px;">多くの人々は、豆乳を飲むことは健康的だと思っています。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: TRY 1 - 並べかえ(形式主語・形式目的語) -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語を並べかえましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① It ( read / is / difficult / to ) books by that author.</p>
+                <p class="try-q" style="margin-top:8px;">→ It <span class="hidden-answer" onclick="this.classList.toggle('show')">is difficult to read</span> books by that author.</p>
+                <p class="try-ja">あの著者の本を読むことは難しいです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② But it ( necessary / to / is / read ) them when we are young.</p>
+                <p class="try-q" style="margin-top:8px;">→ But it <span class="hidden-answer" onclick="this.classList.toggle('show')">is necessary to read</span> them when we are young.</p>
+                <p class="try-ja">しかし、若いときに読む必要があります。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I find ( important / to / it / finish ) reading them in high school days.</p>
+                <p class="try-q" style="margin-top:8px;">→ I find <span class="hidden-answer" onclick="this.classList.toggle('show')">it important to finish</span> reading them in high school days.</p>
+                <p class="try-ja">私は高校時代にそれらの本を読み終えることが大切だと思います。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: TRY 2 - 適語選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>exhibits</span><span>/</span><span>inform</span><span>/</span><span>familiar</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① The museum ( <span class="hidden-answer" onclick="this.classList.toggle('show')">exhibits</span> ) many famous paintings.</p>
+                <p class="try-ja">その美術館は多くの有名な絵画を展示しています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② Some of them are ( <span class="hidden-answer" onclick="this.classList.toggle('show')">familiar</span> ).</p>
+                <p class="try-ja">その中にはよく知られているものもあります。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ Paintings ( <span class="hidden-answer" onclick="this.classList.toggle('show')">inform</span> ) us of the lifestyle of those days.</p>
+                <p class="try-ja">絵画は私たちにその当時の生活様式を教えてくれます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: TRY 3 - 語句並べかえ(復習・発展) -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3 <span style="font-size:1.3rem;color:#9a3412;">［復習・発展］</span></h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語句を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>many kinds</span><span>/</span><span>feel nostalgic</span><span>/</span><span>was once</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① That old building ( <span class="hidden-answer" onclick="this.classList.toggle('show')">was once</span> ) a movie theater.</p>
+                <p class="try-ja">あの古い建物はかつて映画館でした。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② People enjoyed watching ( <span class="hidden-answer" onclick="this.classList.toggle('show')">many kinds</span> ) of movies there.</p>
+                <p class="try-ja">人々はそこで多くの種類の映画を見て楽しみました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ Some people ( <span class="hidden-answer" onclick="this.classList.toggle('show')">feel nostalgic</span> ) about seeing the building.</p>
+                <p class="try-ja">その建物を見て懐かしいと感じる人もいます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+
+        // --- 自動フィット: 枠からあふれる時だけ、そのスライドを収まる倍率に縮める ---
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                const isGrid = box.classList.contains('grid');
+                let wrap = box.querySelector(':scope > .fit-wrap');
+                if(!wrap){
+                    wrap = document.createElement('div');
+                    wrap.className = 'fit-wrap';
+                    wrap.style.width = '100%';
+                    wrap.style.transformOrigin = 'top center';
+                    if(isGrid){
+                        let cols = 1, gap = '1.25rem';
+                        box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                        box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                        wrap.style.display = 'grid';
+                        wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                        wrap.style.gap = gap;
+                        [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                        box.style.display = 'block';
+                    } else {
+                        [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                    }
+                    while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                    box.appendChild(wrap);
+                }
+                wrap.style.transform = 'none';
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0;
+                const pb = parseFloat(cs.paddingBottom) || 0;
+                const avail = box.clientHeight - pt - pb;
+                const need = wrap.scrollHeight;
+                if(need > avail - 1 && need > 0){
+                    if(!isGrid){ box.style.justifyContent = 'flex-start'; }
+                    wrap.style.transform = 'scale(' + (avail / need) + ')';
+                } else {
+                    if(!isGrid){ box.style.justifyContent = ''; }
+                }
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('load', () => requestAnimationFrame(fitActiveSlide));
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
