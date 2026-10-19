@@ -246,6 +246,155 @@
         </div>
     </div>
 
+    <!-- Slide 6b: ペア対戦 単語バトル (Vocabulary Battle) -->
+    <style>
+        .vb-pscore{font-size:clamp(1.1rem,2.6vh,1.7rem);font-weight:900;padding:6px 22px;border-radius:14px;border:3px solid transparent;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .15s;}
+        #vb-p1box{color:#dc2626;}
+        #vb-p2box{color:#2563eb;}
+        .vb-pscore.vb-active{border-color:currentColor;transform:scale(1.1);}
+        .vb-wcard{background:#fff;border-radius:12px;padding:8px 10px;border:2px solid #fde68a;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+        .vb-wen{font-size:clamp(1rem,2.2vh,1.4rem);font-weight:900;color:#1f2937;}
+        .vb-wja{font-size:clamp(.8rem,1.7vh,1.05rem);color:#92400e;font-weight:700;}
+        .vb-btn{font-size:clamp(1.2rem,3vh,1.9rem);font-weight:900;color:#fff;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;border-radius:16px;padding:14px 44px;cursor:pointer;box-shadow:0 4px 14px rgba(239,68,68,.3);}
+        .vb-btn:hover{filter:brightness(1.06);}
+        .vb-choice{font-size:clamp(1.3rem,3.4vh,2.2rem);font-weight:900;color:#1e3a8a;background:#fff;border:3px solid #bfdbfe;border-radius:16px;padding:14px;cursor:pointer;transition:all .15s;}
+        .vb-choice:hover:not(:disabled){background:#eff6ff;border-color:#60a5fa;}
+        .vb-choice.vb-correct{background:#dcfce7;border-color:#22c55e;color:#15803d;}
+        .vb-choice.vb-wrong{background:#fee2e2;border-color:#ef4444;color:#b91c1c;}
+    </style>
+    <div class="slide" style="background:linear-gradient(135deg,#fff7ed,#fefce8);">
+        <div id="vb-wrap" style="width:100%;max-width:880px;margin:0 auto;display:flex;flex-direction:column;height:100%;">
+            <h2 class="slide-title text-orange-600" style="margin-bottom:0.4rem;">⚔️ 単語バトル <span style="font-size:1.1rem;color:#92400e;font-weight:700;">ペアで対戦！</span></h2>
+
+            <div id="vb-score" style="display:none;justify-content:center;gap:18px;margin-bottom:10px;">
+                <div class="vb-pscore" id="vb-p1box">P1 <b id="vb-p1">0</b></div>
+                <div class="vb-pscore" id="vb-p2box">P2 <b id="vb-p2">0</b></div>
+            </div>
+
+            <div id="vb-start" style="flex:1;display:flex;flex-direction:column;min-height:0;">
+                <p style="text-align:center;font-size:clamp(1rem,2.4vh,1.4rem);font-weight:700;color:#92400e;margin-bottom:10px;">\U0001F4D6 まず単語を覚えよう！　ペアで「どっちが多く正解できるか」勝負だ</p>
+                <div id="vb-wordlist" style="flex:1;overflow:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:4px;"></div>
+                <div style="text-align:center;margin-top:14px;"><button class="vb-btn" onclick="VB.start()">▶ 対戦スタート</button></div>
+            </div>
+
+            <div id="vb-game" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;min-height:0;gap:14px;">
+                <div id="vb-prog" style="font-size:1rem;font-weight:800;color:#78716c;"></div>
+                <div id="vb-turn" style="font-size:clamp(1.1rem,2.8vh,1.7rem);font-weight:900;padding:6px 26px;border:3px solid #fca5a5;border-radius:999px;background:#fff;"></div>
+                <div style="font-size:.95rem;color:#78716c;font-weight:700;">この日本語の意味の英語は？</div>
+                <div id="vb-q" style="font-size:clamp(1.8rem,5vh,3.2rem);font-weight:900;color:#1f2937;text-align:center;"></div>
+                <div id="vb-choices" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:720px;"></div>
+                <div id="vb-feedback" style="font-size:clamp(1.1rem,2.6vh,1.6rem);font-weight:900;height:1.6em;"></div>
+            </div>
+
+            <div id="vb-result" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:18px;">
+                <div style="font-size:3rem;">\U0001F389</div>
+                <div id="vb-winner" style="font-size:clamp(2rem,6vh,3.5rem);font-weight:900;"></div>
+                <div id="vb-final" style="font-size:clamp(1.2rem,3vh,2rem);font-weight:800;color:#44403c;"></div>
+                <button class="vb-btn" onclick="VB.reset()">\U0001F504 もう一度</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function(){
+        const WORDS=[
+            {en:"symbolize",ja:"象徴する"},
+            {en:"amazed",ja:"驚いた"},
+            {en:"tiny",ja:"とても小さい"},
+            {en:"carving",ja:"彫り・彫刻"},
+            {en:"arcade(s)",ja:"ゲームセンター"},
+            {en:"pavement(s)",ja:"歩道"}
+        ];
+        const TOTAL=10;
+        let qi=0,p=[0,0],answerWord=null,locked=false,actx=null;
+        function $(id){return document.getElementById(id);}
+        function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+        function beep(ok){
+            try{
+                actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+                const now=actx.currentTime, notes= ok?[660,990]:[220,160];
+                notes.forEach(function(f,i){
+                    const o=actx.createOscillator(),g=actx.createGain();
+                    o.type= ok?"sine":"square"; o.frequency.value=f;
+                    o.connect(g); g.connect(actx.destination);
+                    const t=now+i*0.12;
+                    g.gain.setValueAtTime(0.0001,t);
+                    g.gain.exponentialRampToValueAtTime(0.22,t+0.02);
+                    g.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
+                    o.start(t); o.stop(t+0.2);
+                });
+            }catch(e){}
+        }
+        function buildStudy(){
+            const el=$("vb-wordlist"); if(!el) return;
+            el.innerHTML=WORDS.map(function(w){return '<div class="vb-wcard"><div class="vb-wen">'+w.en+'</div><div class="vb-wja">'+w.ja+'</div></div>';}).join("");
+        }
+        function updateScore(){
+            $("vb-p1").textContent=p[0]; $("vb-p2").textContent=p[1];
+            const cur=qi%2;
+            $("vb-p1box").classList.toggle("vb-active",cur===0);
+            $("vb-p2box").classList.toggle("vb-active",cur===1);
+        }
+        function nextQ(){
+            if(qi>=TOTAL){return finish();}
+            locked=false;
+            const cur=qi%2;
+            $("vb-turn").innerHTML=(cur===0?'<span style="color:#dc2626;">プレイヤー1</span>':'<span style="color:#2563eb;">プレイヤー2</span>')+' の番';
+            $("vb-turn").style.borderColor=cur===0?"#fca5a5":"#93c5fd";
+            answerWord=WORDS[Math.floor(Math.random()*WORDS.length)];
+            $("vb-q").textContent=answerWord.ja;
+            const others=shuffle(WORDS.filter(function(w){return w.en!==answerWord.en;})).slice(0,3).map(function(w){return w.en;});
+            const choices=shuffle([answerWord.en].concat(others));
+            $("vb-choices").innerHTML=choices.map(function(c){return '<button class="vb-choice" data-en="'+c+'">'+c+'</button>';}).join("");
+            Array.prototype.forEach.call($("vb-choices").querySelectorAll(".vb-choice"),function(b){b.onclick=function(){pick(b);};});
+            $("vb-feedback").textContent="";
+            $("vb-prog").textContent="第 "+(qi+1)+" 問 / "+TOTAL;
+            updateScore();
+        }
+        function pick(btn){
+            if(locked) return; locked=true;
+            const cur=qi%2, ok=btn.dataset.en===answerWord.en;
+            Array.prototype.forEach.call($("vb-choices").querySelectorAll(".vb-choice"),function(b){
+                b.disabled=true;
+                if(b.dataset.en===answerWord.en) b.classList.add("vb-correct");
+                else if(b===btn) b.classList.add("vb-wrong");
+            });
+            beep(ok);
+            if(ok){ p[cur]+=10; $("vb-feedback").innerHTML='<span style="color:#16a34a;">⭕ 正解！ +10</span>'; }
+            else { $("vb-feedback").innerHTML='<span style="color:#dc2626;">❌ 正解は '+answerWord.en+'</span>'; }
+            updateScore();
+            setTimeout(function(){ qi++; nextQ(); },1400);
+        }
+        function finish(){
+            $("vb-game").style.display="none";
+            $("vb-result").style.display="flex";
+            let msg;
+            if(p[0]>p[1]) msg='<span style="color:#dc2626;">\U0001F3C6 プレイヤー1 の勝ち！</span>';
+            else if(p[1]>p[0]) msg='<span style="color:#2563eb;">\U0001F3C6 プレイヤー2 の勝ち！</span>';
+            else msg='<span style="color:#92400e;">\U0001F91D 引き分け！</span>';
+            $("vb-winner").innerHTML=msg;
+            $("vb-final").innerHTML='P1 <b style="color:#dc2626;">'+p[0]+'</b> 点　/　P2 <b style="color:#2563eb;">'+p[1]+'</b> 点';
+        }
+        window.VB={
+            start:function(){
+                qi=0;p=[0,0];
+                $("vb-start").style.display="none";
+                $("vb-result").style.display="none";
+                $("vb-game").style.display="flex";
+                $("vb-score").style.display="flex";
+                nextQ();
+            },
+            reset:function(){
+                $("vb-result").style.display="none";
+                $("vb-game").style.display="none";
+                $("vb-score").style.display="none";
+                $("vb-start").style.display="flex";
+            }
+        };
+        if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",buildStudy);
+        else buildStudy();
+    })();
+    </script>
+
     <!-- Slide 7: Check -->
     <div class="slide bg-yellow-50">
         <h2 class="slide-title text-orange-600">Check</h2>
