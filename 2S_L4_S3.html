@@ -274,6 +274,10 @@
             <div id="vb-start" style="flex:1;display:flex;flex-direction:column;min-height:0;">
                 <p style="text-align:center;font-size:clamp(1rem,2.4vh,1.4rem);font-weight:700;color:#92400e;margin-bottom:10px;">\U0001F4D6 まず単語を覚えよう！　ペアで「どっちが多く正解できるか」勝負だ</p>
                 <div id="vb-wordlist" style="flex:1;overflow:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:4px;"></div>
+                <div id="vb-qr" style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px;background:#fffbeb;border:2px solid #fde68a;border-radius:14px;padding:10px 18px;">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAIAAABnRsZeAAAHmklEQVR4nO3csXErNxhGUcmjQhi7AvcfuQLH6oTuYAPvhfFjeU5OPnKpdwfBN/h+v99fAJ0/wvcCkBWgJytATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0Ds586LX3/+9fUsv//8vehprHvna7v+3V2uv+/M32imO0/DaQWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFmLSyXbfSW2fdGnLmRnPXQned62+0bkd7x++BT/IOpxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMV4JyV7Ylr1+ctVnf9u3fWruue88wN7uvA/wvXnFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgKesbJ9n5o523YJz5jc68fs+j9MKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCzss3suid13a2x6/a7M7ewM2+6PZHTChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQrwlJXt8zaL6/as19bd7XrifvfEe39/H/d/wWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBThnZTvzvtITPW/teseJn/k18lOt47QCxGQFiMkKEJMVICYrQExWgJisADFZAWKyAkxa2T7vDs51dj2rXTfsrrPuM+967fM4rQAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAse/3+/2fX/xp96ReW/eNnvck73zmXb/R836FdZxWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoBJd9le23VP6rp/15Jyvl373Tt+l+13dz0NpxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMV4JyV7bWZt5l+2mJ11254172w637fXX+Tr5GrYqcVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSD2/X6/v9Z43s2vJ97Ou+u16+za4K7bs75Gbp3vcFoBYrICxGQFiMkKEJMVICYrQExWgJisADFZAc5Z2e4yc4V54p71xO3vOrtW1Ndm3nTrtALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICTFrZPm8d+Gn73Zm3Aq8z877hO2b+vk4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0Ds586Ldy1l77zzzFtjd+1od33fdQvdE/es1068I9lpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWYtLKdecfqtV2rxHXv7H7W0zfHd8xcjTutADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACx7/f7/bXDrj3rLrs2x8/b4N6x6zm/Rm5/1/2CTitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrwFPusl33zjP3nc+7nXfmXcV33PlG63a0r5EL3WtOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivAU+6yvePOcvTTbjPdtXbdtbFeZ+aTfI18Vk4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK8Ckle2uteu67eCuDe7zbhT+tLtsZ/rdtNB1WgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBzrnL9sT1565V4sy98sz7d3fdz3rH68NuUHZaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQHOuct2nefdCzvzjtVd33edmb/gtZnb7mtOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivAOSvbXXfK3rHrntRdt7eeuJM+8abb14Hr7TucVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaA2M/XJncWfjPvsp25d/y0u2zdoTvh78ppBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAV4ysp213Zw1/27d8y89/fOO9/5Rife7PsauZRd9/fstALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICTFrZzryP9nmbxXWfed2qeN0G946Zv8Jr0155HacVICYrQExWgJisADFZAWKyAsRkBYjJChCTFWDSynbdGnKXO7eoXj+NdbeZnriF3bX+3HVb7e/I77vuUzmtADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACTVrbXdi0Lr9mV/j+fed3meKaZN93u4rQCxGQFiMkKEJMVICYrQExWgJisADFZAWKyApyzst21Hdy1Zz1xZzlzCT1zkTxz7fq77K7iO5xWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCnrGyfZ92tseuWlDOXo+ue5PU7r3vttXXvvOvfdVoBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWJWtpk7G81da9cTt6Ez7/3dtQy+tutXcFoBYrICxGQFiMkKEJMVICYrQExWgJisADFZAZ6yst21/9v1mU/caK67+XWmO9933V75RE4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK8A5K9vnbQdPvFV01zJ43Wtn/k3O/Nt4bXrOTitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQOz7/X7X7wl8NKcVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAr9a/vKnRe7tA1d0AAAAASUVORK5CYII=" alt="QR" style="width:92px;height:92px;display:block;">
+                    <div style="text-align:left;font-size:clamp(.9rem,2vh,1.2rem);font-weight:800;color:#92400e;line-height:1.4;">📱 自分のタブレットで<br>読み取ってプレイ！</div>
+                </div>
                 <div style="text-align:center;margin-top:14px;"><button class="vb-btn" onclick="VB.start()">▶ 対戦スタート</button></div>
             </div>
 
@@ -392,6 +396,21 @@
         };
         if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",buildStudy);
         else buildStudy();
+    })();
+    </script>
+    <script>
+    (function(){
+        if(location.hash!=='#vb') return;
+        var tries=0;
+        var iv=setInterval(function(){
+            if(tries++>80){ clearInterval(iv); return; }
+            var slides=[].slice.call(document.querySelectorAll('.slide'));
+            var target=slides.findIndex(function(s){return s.querySelector('#vb-wrap');});
+            if(target<0 || typeof nextSlide!=='function') return;
+            var guard=0, cur;
+            while((cur=slides.findIndex(function(s){return s.classList.contains('active');}))<target && guard++<40){ nextSlide(); }
+            if(cur>=target){ clearInterval(iv); }
+        },50);
     })();
     </script>
 
