@@ -250,7 +250,7 @@
         </div>
     </div>
 
-    <!-- Slide 6b: ペア対戦 単語バトル (Vocabulary Battle) -->
+    <!-- Slide 6b: ペア対戦 単語バトル (難易度選択つき) -->
     <style>
         .vb-pscore{font-size:clamp(1.1rem,2.6vh,1.7rem);font-weight:900;padding:6px 22px;border-radius:14px;border:3px solid transparent;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:transform .15s;}
         #vb-p1box{color:#dc2626;}
@@ -259,46 +259,63 @@
         .vb-wcard{background:#fff;border-radius:12px;padding:8px 10px;border:2px solid #fde68a;box-shadow:0 1px 4px rgba(0,0,0,.06);}
         .vb-wen{font-size:clamp(1rem,2.2vh,1.4rem);font-weight:900;color:#1f2937;}
         .vb-wja{font-size:clamp(.8rem,1.7vh,1.05rem);color:#92400e;font-weight:700;}
-        .vb-btn{font-size:clamp(1.2rem,3vh,1.9rem);font-weight:900;color:#fff;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;border-radius:16px;padding:14px 44px;cursor:pointer;box-shadow:0 4px 14px rgba(239,68,68,.3);}
+        .vb-btn{font-size:clamp(1.1rem,2.8vh,1.7rem);font-weight:900;color:#fff;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;border-radius:16px;padding:12px 32px;cursor:pointer;box-shadow:0 4px 14px rgba(239,68,68,.3);}
         .vb-btn:hover{filter:brightness(1.06);}
-        .vb-choice{font-size:clamp(1.3rem,3.4vh,2.2rem);font-weight:900;color:#1e3a8a;background:#fff;border:3px solid #bfdbfe;border-radius:16px;padding:14px;cursor:pointer;transition:all .15s;}
+        .vb-choice{font-size:clamp(1.2rem,3.2vh,2rem);font-weight:900;color:#1e3a8a;background:#fff;border:3px solid #bfdbfe;border-radius:16px;padding:14px;cursor:pointer;transition:all .15s;}
         .vb-choice:hover:not(:disabled){background:#eff6ff;border-color:#60a5fa;}
         .vb-choice.vb-correct{background:#dcfce7;border-color:#22c55e;color:#15803d;}
         .vb-choice.vb-wrong{background:#fee2e2;border-color:#ef4444;color:#b91c1c;}
+        #vb-input{font-size:clamp(1.4rem,3.6vh,2.2rem);font-weight:900;color:#1e3a8a;text-align:center;border:3px solid #c4b5fd;border-radius:14px;padding:12px 18px;width:100%;outline:none;}
+        #vb-input:focus{border-color:#7c3aed;}
+        #vb-input.vb-correct{border-color:#22c55e;background:#dcfce7;}
+        #vb-input.vb-wrong{border-color:#ef4444;background:#fee2e2;}
     </style>
     <div class="slide" style="background:linear-gradient(135deg,#fff7ed,#fefce8);">
         <div id="vb-wrap" style="width:100%;max-width:880px;margin:0 auto;display:flex;flex-direction:column;height:100%;">
-            <h2 class="slide-title text-orange-600" style="margin-bottom:0.4rem;">⚔️ 単語バトル <span style="font-size:1.1rem;color:#92400e;font-weight:700;">ペアで対戦！</span></h2>
+            <h2 class="slide-title text-orange-600" style="margin-bottom:0.3rem;">⚔️ 単語バトル <span style="font-size:1.1rem;color:#92400e;font-weight:700;">ペアで対戦！</span></h2>
 
-            <div id="vb-score" style="display:none;justify-content:center;gap:18px;margin-bottom:10px;">
+            <div id="vb-score" style="display:none;justify-content:center;gap:18px;margin-bottom:8px;">
                 <div class="vb-pscore" id="vb-p1box">P1 <b id="vb-p1">0</b></div>
                 <div class="vb-pscore" id="vb-p2box">P2 <b id="vb-p2">0</b></div>
             </div>
 
+            <!-- 暗記タイム + 難易度選択 -->
             <div id="vb-start" style="flex:1;display:flex;flex-direction:column;min-height:0;">
-                <p style="text-align:center;font-size:clamp(1rem,2.4vh,1.4rem);font-weight:700;color:#92400e;margin-bottom:10px;">\U0001F4D6 まず単語を覚えよう！　ペアで「どっちが多く正解できるか」勝負だ</p>
-                <div id="vb-wordlist" style="flex:1;overflow:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:4px;"></div>
-                <div id="vb-qr" style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px;background:#fffbeb;border:2px solid #fde68a;border-radius:14px;padding:10px 18px;">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAIAAABnRsZeAAAHi0lEQVR4nO3du3EjRwBFUVDFQGArAuVvKQLZyGTkyhpDc7v6g3N8EsCAe6uNV70/13W9ADp/hL8LQFaAnqwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACx3yc//P7zr9dZPv/8PehpjPvN92a97iz3n3fN72hNT56G0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKsNLKdtxKb5xxa8g1N5qzFrrj3H+icTvaJz4bPsknnFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgH1WtjuuXc9brM563Sdr13HPec0N7nvDfwv3nFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgFNWtucZtxxd83XHefKJdvy853FaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiVrbb39467nVnvedZ1rzpdkdOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivAKSvb8zaLa94p+2373R2/o89x/xacVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAfVa2a95XuqZZi9U1V6f3dnzP7yXf1ThOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivASivb8+7gHGfWsxq3wZ1l3Hue9bPncVoBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWI/13X97x/+tntS7437ROc9ySfvedZ3dN63MI7TChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQqwz122s+5JHfe6lpTrm7XffeIzbL8762k4rQAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAK61sd7z7c9wGd8f97qzXnfW3MW5HO+7b/yx5K/A9pxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVIPZzXdfrmxacT8xaf45bYa55G/GO38Ks3/yElS2wDVkBYrICxGQFiMkKEJMVICYrQExWgJisAPvcZXtv1jb0ifP2u09+9tv2u7Pe1b0nz3nc53VaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFWWtnOuoNz3DrwySd68q6+bb/7be/5M+zbn/Vv8J7TChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQqw0sp23D2a46z5urN2lrPuZx33eXfc/t7b8c5gpxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVYJ+7bNfcO457V0/2jjs+5zW/3zX/NsaZ9R3dc1oBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWI/13W9zjLrztF7591Wu+a+c9bfxriN9WfDb9BpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAU4ZWU7a++4plnL4DXvo51l3FJ2zYWulS2wDVkBYrICxGQFiMkKEJMVICYrQExWgJisALHf15fd7brjnnXcVnLNrfOOt+Q+8Z70DY57kk4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK8BKd9metw5c8109Me47mrXfHccn+i932QILkRUgJitATFaAmKwAMVkBYrICxGQFiMkKsNJdtuPuZx1n3LLwvM3xjk/yvNuXd1wGO60AMVkBYrICxGQFiMkKEJMVICYrQExWgJisAPvcZfvEeRvNHe+FXXNXuuMn+iz59+wuW2AbsgLEZAWIyQoQkxUgJitATFaAmKwAMVkB9lnZjvvf6ndcna5pxye55op6zaXsvXHPymkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYj9vja045Ly3rhF8rfdZesO3RX+pTitADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACnrGxn7UrHrTDXfFdr/uYn3++45eiaz+oz6fM+eV2nFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxVgpZXtmreojvvN5y10x22dx21wZz3nNde970n3HN9zWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYj/XdS24hpxl3Nr1vLt7z3vOay6SP5M+0RNOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivASnfZ3pt1j+aO94auuaMd967GvedZq+I1b7qdxWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBdhnZbvjNvSJ8+5JnWXNb3DNtetn2E23TzitADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACnrGy/zZo72jWXo9+2V35PWkKPe12nFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgZmWbGbdnHfezO25D17wjedYy+N6sb8FpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAU4ZWU7a/836z3vuDo975bccZ933F55R04rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK8A+K9vztoOzbhWdtf58sqMd97Nr/k2ueePse9JzdloBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWI/13XVvxP4ak4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAr9a/N5/EDbpmYwEAAAAASUVORK5CYII=" alt="QR" style="width:92px;height:92px;display:block;">
-                    <div style="text-align:left;font-size:clamp(.9rem,2vh,1.2rem);font-weight:800;color:#92400e;line-height:1.4;">📱 自分のタブレットで<br>読み取ってプレイ！</div>
+                <p style="text-align:center;font-size:clamp(.95rem,2.2vh,1.3rem);font-weight:700;color:#92400e;margin-bottom:8px;">📖 まず単語を覚えよう！　ペアで「どっちが多く正解できるか」勝負だ</p>
+                <div id="vb-wordlist" style="flex:1;overflow:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:4px;"></div>
+                <div style="margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+                    <div style="font-weight:900;color:#92400e;font-size:clamp(1rem,2.4vh,1.35rem);">難易度をえらんでスタート 👇</div>
+                    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+                        <button class="vb-btn" style="background:linear-gradient(135deg,#34d399,#059669);" onclick="VB.start('normal')">😊 普通（4択）</button>
+                        <button class="vb-btn" style="background:linear-gradient(135deg,#fb7185,#7c3aed);" onclick="VB.start('hard')">🔥 鬼難（タイピング）</button>
+                    </div>
+                    <div id="vb-qr" style="display:flex;align-items:center;justify-content:center;gap:12px;background:#fffbeb;border:2px solid #fde68a;border-radius:12px;padding:8px 16px;margin-top:4px;">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAIAAABnRsZeAAAHi0lEQVR4nO3du3EjRwBFUVDFQGArAuVvKQLZyGTkyhpDc7v6g3N8EsCAe6uNV70/13W9ADp/hL8LQFaAnqwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACx3yc//P7zr9dZPv/8PehpjPvN92a97iz3n3fN72hNT56G0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKsNLKdtxKb5xxa8g1N5qzFrrj3H+icTvaJz4bPsknnFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgH1WtjuuXc9brM563Sdr13HPec0N7nvDfwv3nFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgFNWtucZtxxd83XHefKJdvy853FaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiVrbb39467nVnvedZ1rzpdkdOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivAKSvb8zaLa94p+2373R2/o89x/xacVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAfVa2a95XuqZZi9U1V6f3dnzP7yXf1ThOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivASivb8+7gHGfWsxq3wZ1l3Hue9bPncVoBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWI/13X97x/+tntS7437ROc9ySfvedZ3dN63MI7TChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQqwz122s+5JHfe6lpTrm7XffeIzbL8762k4rQAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAK61sd7z7c9wGd8f97qzXnfW3MW5HO+7b/yx5K/A9pxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVIPZzXdfrmxacT8xaf45bYa55G/GO38Ks3/yElS2wDVkBYrICxGQFiMkKEJMVICYrQExWgJisAPvcZXtv1jb0ifP2u09+9tv2u7Pe1b0nz3nc53VaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFWWtnOuoNz3DrwySd68q6+bb/7be/5M+zbn/Vv8J7TChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQqw0sp23D2a46z5urN2lrPuZx33eXfc/t7b8c5gpxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVYJ+7bNfcO457V0/2jjs+5zW/3zX/NsaZ9R3dc1oBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWI/13W9zjLrztF7591Wu+a+c9bfxriN9WfDb9BpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAU4ZWU7a++4plnL4DXvo51l3FJ2zYWulS2wDVkBYrICxGQFiMkKEJMVICYrQExWgJisALHf15fd7brjnnXcVnLNrfOOt+Q+8Z70DY57kk4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK8BKd9metw5c8109Me47mrXfHccn+i932QILkRUgJitATFaAmKwAMVkBYrICxGQFiMkKsNJdtuPuZx1n3LLwvM3xjk/yvNuXd1wGO60AMVkBYrICxGQFiMkKEJMVICYrQExWgJisAPvcZfvEeRvNHe+FXXNXuuMn+iz59+wuW2AbsgLEZAWIyQoQkxUgJitATFaAmKwAMVkB9lnZjvvf6ndcna5pxye55op6zaXsvXHPymkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYj9vja045Ly3rhF8rfdZesO3RX+pTitADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACnrGxn7UrHrTDXfFdr/uYn3++45eiaz+oz6fM+eV2nFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxVgpZXtmreojvvN5y10x22dx21wZz3nNde970n3HN9zWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYj/XdS24hpxl3Nr1vLt7z3vOay6SP5M+0RNOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJivASnfZ3pt1j+aO94auuaMd967GvedZq+I1b7qdxWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBdhnZbvjNvSJ8+5JnWXNb3DNtetn2E23TzitADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACnrGy/zZo72jWXo9+2V35PWkKPe12nFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgZmWbGbdnHfezO25D17wjedYy+N6sb8FpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAU4ZWU7a/836z3vuDo975bccZ933F55R04rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK8A+K9vztoOzbhWdtf58sqMd97Nr/k2ueePse9JzdloBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWI/13XVvxP4ak4rQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAr9a/N5/EDbpmYwEAAAAASUVORK5CYII=" alt="QR" style="width:80px;height:80px;display:block;">
+                        <div style="text-align:left;font-size:clamp(.85rem,1.9vh,1.1rem);font-weight:800;color:#92400e;line-height:1.4;">📱 自分のタブレットで<br>読み取ってプレイ！</div>
+                    </div>
                 </div>
-                <div style="text-align:center;margin-top:14px;"><button class="vb-btn" onclick="VB.start()">▶ 対戦スタート</button></div>
             </div>
 
+            <!-- 対戦中 -->
             <div id="vb-game" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;min-height:0;gap:14px;">
                 <div id="vb-prog" style="font-size:1rem;font-weight:800;color:#78716c;"></div>
                 <div id="vb-turn" style="font-size:clamp(1.1rem,2.8vh,1.7rem);font-weight:900;padding:6px 26px;border:3px solid #fca5a5;border-radius:999px;background:#fff;"></div>
                 <div style="font-size:.95rem;color:#78716c;font-weight:700;">この日本語の意味の英語は？</div>
                 <div id="vb-q" style="font-size:clamp(1.8rem,5vh,3.2rem);font-weight:900;color:#1f2937;text-align:center;"></div>
                 <div id="vb-choices" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:720px;"></div>
+                <div id="vb-typing" style="display:none;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:520px;">
+                    <input id="vb-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="英語を入力してEnter">
+                    <button class="vb-btn" style="padding:10px 30px;" onclick="VB.submit()">回答する</button>
+                </div>
                 <div id="vb-feedback" style="font-size:clamp(1.1rem,2.6vh,1.6rem);font-weight:900;height:1.6em;"></div>
             </div>
 
-            <div id="vb-result" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:18px;">
-                <div style="font-size:3rem;">\U0001F389</div>
+            <!-- 結果 -->
+            <div id="vb-result" style="display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+                <div style="font-size:3rem;">🎉</div>
                 <div id="vb-winner" style="font-size:clamp(2rem,6vh,3.5rem);font-weight:900;"></div>
                 <div id="vb-final" style="font-size:clamp(1.2rem,3vh,2rem);font-weight:800;color:#44403c;"></div>
-                <button class="vb-btn" onclick="VB.reset()">\U0001F504 もう一度</button>
+                <button class="vb-btn" onclick="VB.reset()">🔄 もう一度（難易度えらび直し）</button>
             </div>
         </div>
     </div>
@@ -314,7 +331,7 @@
             {en:"capsule",ja:"カプセル"}
         ];
         const TOTAL=10;
-        let qi=0,p=[0,0],answerWord=null,locked=false,actx=null;
+        let qi=0,p=[0,0],answerWord=null,locked=false,actx=null,mode='normal';
         function $(id){return document.getElementById(id);}
         function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
         function beep(ok){
@@ -333,9 +350,22 @@
                 });
             }catch(e){}
         }
+        function norm(s){return (s||"").toLowerCase().replace(/[.。,、!?！？]/g,"").replace(/\s+/g," ").trim();}
+        function acceptedForms(en){
+            var forms=[];
+            en.split(/\s+-\s+|\s*\/\s*/).forEach(function(part){
+                [part, part.replace(/\([^)]*\)/g,""), part.replace(/\(([^)]*)\)/g,"$1"), part.replace(/-/g," "), part.replace(/-/g,"")].forEach(function(v){
+                    v=norm(v.replace(/~/g,"").replace(/[()]/g," "));
+                    if(v) forms.push(v);
+                });
+            });
+            return forms;
+        }
         function buildStudy(){
             const el=$("vb-wordlist"); if(!el) return;
             el.innerHTML=WORDS.map(function(w){return '<div class="vb-wcard"><div class="vb-wen">'+w.en+'</div><div class="vb-wja">'+w.ja+'</div></div>';}).join("");
+            const inp=$("vb-input");
+            if(inp && !inp._bound){ inp._bound=true; inp.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); VB.submit(); } }); }
         }
         function updateScore(){
             $("vb-p1").textContent=p[0]; $("vb-p2").textContent=p[1];
@@ -351,40 +381,62 @@
             $("vb-turn").style.borderColor=cur===0?"#fca5a5":"#93c5fd";
             answerWord=WORDS[Math.floor(Math.random()*WORDS.length)];
             $("vb-q").textContent=answerWord.ja;
-            const others=shuffle(WORDS.filter(function(w){return w.en!==answerWord.en;})).slice(0,3).map(function(w){return w.en;});
-            const choices=shuffle([answerWord.en].concat(others));
-            $("vb-choices").innerHTML=choices.map(function(c){return '<button class="vb-choice" data-en="'+c+'">'+c+'</button>';}).join("");
-            Array.prototype.forEach.call($("vb-choices").querySelectorAll(".vb-choice"),function(b){b.onclick=function(){pick(b);};});
             $("vb-feedback").textContent="";
-            $("vb-prog").textContent="第 "+(qi+1)+" 問 / "+TOTAL;
+            $("vb-prog").textContent="第 "+(qi+1)+" 問 / "+TOTAL+"　"+(mode==="hard"?"🔥鬼難":"😊普通");
+            if(mode==="normal"){
+                $("vb-choices").style.display="grid";
+                $("vb-typing").style.display="none";
+                const others=shuffle(WORDS.filter(function(w){return w.en!==answerWord.en;})).slice(0,3).map(function(w){return w.en;});
+                const choices=shuffle([answerWord.en].concat(others));
+                $("vb-choices").innerHTML=choices.map(function(c){return '<button class="vb-choice" data-en="'+c+'">'+c+'</button>';}).join("");
+                Array.prototype.forEach.call($("vb-choices").querySelectorAll(".vb-choice"),function(b){b.onclick=function(){pick(b);};});
+            } else {
+                $("vb-choices").style.display="none";
+                $("vb-typing").style.display="flex";
+                const inp=$("vb-input"); inp.className=""; inp.disabled=false; inp.value=""; setTimeout(function(){inp.focus();},50);
+            }
             updateScore();
+        }
+        function reveal(ok){
+            const cur=qi%2;
+            beep(ok);
+            if(ok){ p[cur]+=10; $("vb-feedback").innerHTML='<span style="color:#16a34a;">⭕ 正解！ +10</span>'; }
+            else { $("vb-feedback").innerHTML='<span style="color:#dc2626;">❌ 正解は '+answerWord.en+'</span>'; }
+            updateScore();
+            setTimeout(function(){ qi++; nextQ(); }, mode==="hard"?1700:1400);
         }
         function pick(btn){
             if(locked) return; locked=true;
-            const cur=qi%2, ok=btn.dataset.en===answerWord.en;
+            const ok=btn.dataset.en===answerWord.en;
             Array.prototype.forEach.call($("vb-choices").querySelectorAll(".vb-choice"),function(b){
                 b.disabled=true;
                 if(b.dataset.en===answerWord.en) b.classList.add("vb-correct");
                 else if(b===btn) b.classList.add("vb-wrong");
             });
-            beep(ok);
-            if(ok){ p[cur]+=10; $("vb-feedback").innerHTML='<span style="color:#16a34a;">⭕ 正解！ +10</span>'; }
-            else { $("vb-feedback").innerHTML='<span style="color:#dc2626;">❌ 正解は '+answerWord.en+'</span>'; }
-            updateScore();
-            setTimeout(function(){ qi++; nextQ(); },1400);
+            reveal(ok);
+        }
+        function submit(){
+            if(locked) return;
+            const inp=$("vb-input"); const typed=inp.value;
+            if(!norm(typed)) return;
+            locked=true;
+            const ok=acceptedForms(answerWord.en).indexOf(norm(typed))>=0;
+            inp.disabled=true; inp.classList.add(ok?"vb-correct":"vb-wrong");
+            reveal(ok);
         }
         function finish(){
             $("vb-game").style.display="none";
             $("vb-result").style.display="flex";
             let msg;
-            if(p[0]>p[1]) msg='<span style="color:#dc2626;">\U0001F3C6 プレイヤー1 の勝ち！</span>';
-            else if(p[1]>p[0]) msg='<span style="color:#2563eb;">\U0001F3C6 プレイヤー2 の勝ち！</span>';
-            else msg='<span style="color:#92400e;">\U0001F91D 引き分け！</span>';
+            if(p[0]>p[1]) msg='<span style="color:#dc2626;">🏆 プレイヤー1 の勝ち！</span>';
+            else if(p[1]>p[0]) msg='<span style="color:#2563eb;">🏆 プレイヤー2 の勝ち！</span>';
+            else msg='<span style="color:#92400e;">🤝 引き分け！</span>';
             $("vb-winner").innerHTML=msg;
             $("vb-final").innerHTML='P1 <b style="color:#dc2626;">'+p[0]+'</b> 点　/　P2 <b style="color:#2563eb;">'+p[1]+'</b> 点';
         }
         window.VB={
-            start:function(){
+            start:function(m){
+                mode=(m==="hard")?"hard":"normal";
                 qi=0;p=[0,0];
                 $("vb-start").style.display="none";
                 $("vb-result").style.display="none";
@@ -392,6 +444,7 @@
                 $("vb-score").style.display="flex";
                 nextQ();
             },
+            submit:submit,
             reset:function(){
                 $("vb-result").style.display="none";
                 $("vb-game").style.display="none";
