@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willing p.34-37 解説</title>
+<style>
+:root{
+  --bg:#1f2a37; --paper:#fffdf8; --ink:#1f2937; --sub:#6b7280;
+  --accent:#2563eb; --accent2:#dc2626; --ok:#047857; --soft:#eef4ff; --line:#e5e7eb; --hl:#fff3b0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden;
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);border-radius:14px;padding:48px 64px 56px;
+  display:none;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.slide.active{display:flex}
+.tag{display:inline-block;font-size:18px;font-weight:700;color:#fff;background:var(--accent);padding:4px 14px;border-radius:999px;margin-bottom:10px;align-self:flex-start}
+.tag.g{background:var(--ok)}
+h1{font-size:56px;line-height:1.25}
+h2{font-size:38px;margin-bottom:6px}
+.lead{font-size:22px;color:var(--sub);margin-bottom:22px}
+.qs{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
+.q{font-size:25px;line-height:1.4;padding:7px 16px;border-left:6px solid var(--line);cursor:pointer;border-radius:6px;transition:background .2s}
+.q:hover{background:#f7f7f7}
+.q .ja{font-size:18px;color:var(--sub);margin-left:12px}
+.q .no{font-weight:700;color:var(--accent);margin-right:8px}
+.ans{display:none;margin-top:2px;font-size:25px}
+.ans b{color:var(--accent2)}
+.ans .why{font-size:18px;color:var(--ok);margin-left:14px}
+.q.open{border-left-color:var(--accent2);background:#fff7f7}
+.q.open .ans{display:block}
+.blank{display:inline-block;min-width:110px;border-bottom:3px solid var(--ink);text-align:center}
+.q.open .blank{color:var(--accent2);font-weight:700;border-bottom-color:var(--accent2)}
+.q .blank .fill{visibility:hidden}
+.q.open .blank .fill{visibility:visible}
+table{border-collapse:collapse;width:100%;font-size:24px}
+th,td{border:2px solid var(--line);padding:10px 14px;text-align:left}
+th{background:var(--soft);color:var(--accent)}
+.box{background:var(--soft);border-radius:12px;padding:18px 24px;font-size:24px;line-height:1.65;margin-bottom:14px}
+.box.red{background:#fff1f1}
+.mk{background:var(--hl);padding:0 4px;border-radius:4px;font-weight:700}
+.arrow{color:var(--accent2);font-weight:700}
+.cols{display:flex;gap:24px}
+.cols>div{flex:1}
+.wgrid{display:flex;flex-wrap:wrap;gap:10px 18px}
+.wgrid .q{flex:1 1 30%;min-width:280px}
+.title-slide{justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fffdf8 60%,#e0ecff)}
+.title-slide .menu{margin-top:26px;font-size:23px;line-height:1.8;color:var(--sub)}
+.foot{position:absolute;bottom:18px;right:28px;font-size:16px;color:var(--sub)}
+.hint{position:absolute;bottom:18px;left:64px;font-size:16px;color:#9ca3af}
+#nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+#nav button{font-size:15px;padding:8px 14px;border:none;border-radius:8px;background:rgba(255,255,255,.88);color:#111;cursor:pointer}
+#nav button:hover{background:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 タイトル -->
+<section class="slide title-slide">
+  <span class="tag">問題集 Willing p.34〜37</span>
+  <h1>There is / are<br>／ 進行形</h1>
+  <div class="menu">
+    ① Lesson 9　There is / are（〜がある・いる）p.34〜35<br>
+    ② Lesson 10　進行形（〜している）p.36〜37
+  </div>
+  <div class="hint">→ / スペース で進む　問題をタップで答え表示</div>
+</section>
+
+<!-- 2 L9 ポイント -->
+<section class="slide">
+  <span class="tag">Lesson 9　Point</span>
+  <h2>There ＋ be動詞 で「〜がある・いる」</h2>
+  <div class="cols" style="margin-top:8px">
+    <div class="box"><b>肯定文</b><br>
+      単数 → There <span class="mk">is</span> a textbook.<br>
+      複数 → There <span class="mk">are</span> some textbooks.<br>
+      <small>※ be動詞は後ろの名詞の数で決める</small></div>
+    <div class="box red"><b>否定文・疑問文</b><br>
+      否定 → There <span class="mk">aren't any</span> textbooks.<br>
+      疑問 → <span class="mk">Are there</span> any textbooks?<br>
+      答え → Yes, there are. / No, there aren't.</div>
+  </div>
+  <div class="box" style="margin-top:4px">⚠ 否定文・疑問文では some ではなく <b>any</b>！
+  ⚠ my bag のような<b>特定のもの</b>には There is が使えない（My bag <b>is</b> …）</div>
+  <div class="foot">2</div>
+</section>
+
+<!-- 3 L9 Get Ready -->
+<section class="slide">
+  <span class="tag">p.34 Get Ready</span>
+  <h2>「〜があります」の文を作ろう</h2>
+  <div class="qs">
+    <div class="q"><span class="no">(1)</span>ネコが2匹、机の下にいます。　There …
+      <div class="ans">→ <b>There are two cats under the desk.</b><span class="why">ネコ2匹＝複数 → There are。「場所」は文の後ろ。</span></div></div>
+    <div class="q"><span class="no">(2)</span>私のかばんは机の下にあります。　My bag …
+      <div class="ans">→ <b>My bag is under the desk.</b><span class="why">my bag は特定のもの → There is は使えない。ふつうの be動詞 is。</span></div></div>
+  </div>
+  <div class="foot">3</div>
+</section>
+
+<!-- 4 L9 Practice A -->
+<section class="slide">
+  <span class="tag">p.34 Practice A</span>
+  <h2>適切な語を選ぼう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>There ( am / is / are ) a dictionary under the desk.
+      <div class="ans">→ <b>is</b><span class="why">a dictionary ＝単数 → is。「机の下に辞書が1冊あります。」</span></div></div>
+    <div class="q"><span class="no">(2)</span>( Am / Is / Are ) there any pictures on the wall?
+      <div class="ans">→ <b>Are</b><span class="why">pictures ＝複数 → Are。「壁に絵が何枚かありますか。」</span></div></div>
+    <div class="q"><span class="no">(3)</span>There ( am / is / are ) 40 students in our class.
+      <div class="ans">→ <b>are</b><span class="why">40 students ＝複数 → are。「クラスに生徒が40人います。」</span></div></div>
+    <div class="q"><span class="no">(4)</span>( Am / Is / Are ) there a microwave oven in your house?
+      <div class="ans">→ <b>Is</b><span class="why">a microwave oven ＝単数 → Is。「家に電子レンジはありますか。」</span></div></div>
+    <div class="q"><span class="no">(5)</span>There ( am / is / are ) some cars in front of the station.
+      <div class="ans">→ <b>are</b><span class="why">some cars ＝複数 → are。「駅前に車が何台かあります。」</span></div></div>
+  </div>
+  <div class="foot">4</div>
+</section>
+
+<!-- 5 L9 Practice B -->
+<section class="slide">
+  <span class="tag">p.35 Practice B</span>
+  <h2>対話を完成させよう（絵を見て）</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>Is <span class="blank"><span class="fill">there</span></span> any juice in the refrigerator? — No, <span class="blank"><span class="fill">there</span></span> <span class="blank"><span class="fill">isn't</span></span>.
+      <span class="ja">冷蔵庫の中にジュースはありますか。</span>
+      <div class="ans"><span class="why">juice は数えられない → is / isn't。答えも there を使う。</span></div></div>
+    <div class="q"><span class="no">(2)</span><span class="blank"><span class="fill">Are</span></span> <span class="blank"><span class="fill">there</span></span> any flowers in the garden? — <span class="blank"><span class="fill">Yes</span></span>, <span class="blank"><span class="fill">there</span></span> <span class="blank"><span class="fill">are</span></span>.
+      <span class="ja">庭には花がありますか。</span>
+      <div class="ans"><span class="why">flowers ＝複数 → Are there。絵に花が見える → Yes, there are。</span></div></div>
+    <div class="q"><span class="no">(3)</span><span class="blank"><span class="fill">Is</span></span> <span class="blank"><span class="fill">there</span></span> an air conditioner in your room? — <span class="blank"><span class="fill">Yes</span></span>, <span class="blank"><span class="fill">there</span></span> <span class="blank"><span class="fill">is</span></span>.
+      <span class="ja">あなたの部屋にエアコンはありますか。</span>
+      <div class="ans"><span class="why">an air conditioner ＝単数 → Is there。絵にエアコンが見える → Yes, there is。</span></div></div>
+  </div>
+  <div class="foot">5</div>
+</section>
+
+<!-- 6 L9 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.35 チャレンジ問題</span>
+  <h2>否定文と疑問文に書きかえよう</h2>
+  <div class="box">合言葉：<span class="mk">some → any</span>／否定は <span class="mk">aren't</span>／疑問は <span class="mk">Are there</span> を文頭に</div>
+  <div class="qs">
+    <div class="q"><span class="no">(1)</span>There are some animals in the forest.
+      <div class="ans">否定 → <b>There aren't any animals in the forest.</b><br>疑問 → <b>Are there any animals in the forest?</b><span class="why">some を any に変えるのを忘れずに！</span></div></div>
+    <div class="q"><span class="no">(2)</span>There are some plants on the balcony.
+      <div class="ans">否定 → <b>There aren't any plants on the balcony.</b><br>疑問 → <b>Are there any plants on the balcony?</b><span class="why">balcony ＝バルコニー。やり方は(1)と同じ。</span></div></div>
+  </div>
+  <div class="foot">6</div>
+</section>
+
+<!-- 7 L9 たんご -->
+<section class="slide">
+  <span class="tag g">p.35 たんご・タンゴ・単語！</span>
+  <h2>家にあるものの名前</h2>
+  <p class="lead">つづりを完成させよう（タップで答え）</p>
+  <div class="qs wgrid">
+    <div class="q"><span class="no">①</span>冷蔵庫<div class="ans">→ <b>refrigerator</b></div></div>
+    <div class="q"><span class="no">②</span>本棚<div class="ans">→ <b>bookshelf</b></div></div>
+    <div class="q"><span class="no">③</span>エアコン<div class="ans">→ <b>air conditioner</b></div></div>
+    <div class="q"><span class="no">④</span>電子レンジ<div class="ans">→ <b>microwave oven</b></div></div>
+    <div class="q"><span class="no">⑤</span>掃除機<div class="ans">→ <b>vacuum cleaner</b></div></div>
+    <div class="q"><span class="no">⑥</span>洗濯機<div class="ans">→ <b>washing machine</b></div></div>
+  </div>
+  <div class="foot">7</div>
+</section>
+
+<!-- 8 L10 ポイント -->
+<section class="slide">
+  <span class="tag">Lesson 10　Point</span>
+  <h2>進行形＝ be動詞 ＋ 動詞の -ing形</h2>
+  <div class="cols" style="margin-top:6px">
+    <div class="box"><b>現在</b>「〜している」<br>
+      I <span class="mk">am using</span> the computer now.<br>
+      否定 → is <b>not</b> using／疑問 → <b>Is</b> he using …?</div>
+    <div class="box red"><b>過去進行形</b>「〜していた」<br>
+      be動詞を過去形に！<br>
+      Nap <span class="mk">was sleeping</span> then.</div>
+  </div>
+  <table style="margin-top:4px">
+    <tr><th>-ing形の作り方</th><th>例</th></tr>
+    <tr><td>ふつう → そのまま -ing</td><td>go→going, play→playing</td></tr>
+    <tr><td>発音しない e → e をとって -ing</td><td>make→making, write→writing</td></tr>
+    <tr><td>短母音＋子音字 → 子音字を重ねて -ing</td><td>run→running, sit→sitting</td></tr>
+    <tr><td>ie → ie を y に変えて -ing</td><td>lie→lying, die→dying</td></tr>
+  </table>
+  <div class="foot">8</div>
+</section>
+
+<!-- 9 L10 Get Ready -->
+<section class="slide">
+  <span class="tag">p.36 Get Ready</span>
+  <h2>-ing形を書いてみよう</h2>
+  <div class="qs wgrid">
+    <div class="q"><span class="no">(1)</span>study<div class="ans">→ <b>studying</b></div></div>
+    <div class="q"><span class="no">(2)</span>write<div class="ans">→ <b>writing</b><span class="why">e をとる</span></div></div>
+    <div class="q"><span class="no">(3)</span>read<div class="ans">→ <b>reading</b></div></div>
+    <div class="q"><span class="no">(4)</span>eat<div class="ans">→ <b>eating</b></div></div>
+    <div class="q"><span class="no">(5)</span>sit<div class="ans">→ <b>sitting</b><span class="why">t を重ねる</span></div></div>
+    <div class="q"><span class="no">(6)</span>run<div class="ans">→ <b>running</b><span class="why">n を重ねる</span></div></div>
+    <div class="q"><span class="no">(7)</span>lie<div class="ans">→ <b>lying</b><span class="why">ie→y</span></div></div>
+    <div class="q"><span class="no">(8)</span>swim<div class="ans">→ <b>swimming</b><span class="why">m を重ねる</span></div></div>
+    <div class="q"><span class="no">(9)</span>smile<div class="ans">→ <b>smiling</b><span class="why">e をとる</span></div></div>
+  </div>
+  <div class="foot">9</div>
+</section>
+
+<!-- 10 L10 Practice A -->
+<section class="slide">
+  <span class="tag">p.37 Practice A</span>
+  <h2>適切な語を選ぼう（波線の時に注目）</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>They ( is / are )( play / playing ) catch now.
+      <div class="ans">→ <b>are playing</b><span class="why">They ＝複数 → are ／ now → 現在進行形。</span></div></div>
+    <div class="q"><span class="no">(2)</span>I ( was / were )( haveing / having ) dinner then.
+      <div class="ans">→ <b>was having</b><span class="why">I の過去は was ／ have は e をとって having。</span></div></div>
+    <div class="q"><span class="no">(3)</span>My parents ( was / were )( watch / watching ) TV when I came home.
+      <div class="ans">→ <b>were watching</b><span class="why">parents ＝複数の過去 → were ／ 帰宅した時＝過去進行形。</span></div></div>
+    <div class="q"><span class="no">(4)</span>Emi ( is / was )( writeing / writing ) a letter now.
+      <div class="ans">→ <b>is writing</b><span class="why">now → is ／ write は e をとって writing。</span></div></div>
+    <div class="q"><span class="no">(5)</span>It ( is / was )( raining / rainning ) hard at that time.
+      <div class="ans">→ <b>was raining</b><span class="why">at that time ＝過去 → was ／ rain はそのまま raining。</span></div></div>
+  </div>
+  <div class="foot">10</div>
+</section>
+
+<!-- 11 L10 Practice B -->
+<section class="slide">
+  <span class="tag">p.37 Practice B</span>
+  <h2>対話を完成させよう（(1)(2)は現在・(3)(4)は過去）</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span><span class="blank"><span class="fill">Is</span></span> she <span class="blank"><span class="fill">reading</span></span> a comic book now? — Yes, <span class="blank"><span class="fill">she</span></span> <span class="blank"><span class="fill">is</span></span>.
+      <div class="ans"><span class="why">現在進行形の疑問 Is ＋ 主語 ＋ -ing。絵＝読んでいる → Yes。</span></div></div>
+    <div class="q"><span class="no">(2)</span><span class="blank"><span class="fill">Are</span></span> they <span class="blank"><span class="fill">playing</span></span> volleyball now? — No, <span class="blank"><span class="fill">they</span></span> <span class="blank"><span class="fill">aren't</span></span>.
+      <div class="ans"><span class="why">they ＝複数 → Are。絵はバレーをしていない → No。</span></div></div>
+    <div class="q"><span class="no">(3)</span><span class="blank"><span class="fill">Was</span></span> she <span class="blank"><span class="fill">watching</span></span> a movie then? — No, <span class="blank"><span class="fill">she</span></span> <span class="blank"><span class="fill">wasn't</span></span>.
+      <div class="ans"><span class="why">then ＝過去 → Was。絵はニュース → 映画ではない → No。</span></div></div>
+    <div class="q"><span class="no">(4)</span><span class="blank"><span class="fill">Were</span></span> they <span class="blank"><span class="fill">drinking</span></span> wine then? — Yes, <span class="blank"><span class="fill">they</span></span> <span class="blank"><span class="fill">were</span></span>.
+      <div class="ans"><span class="why">they の過去 → Were。絵はワインを飲んでいる → Yes。</span></div></div>
+  </div>
+  <div class="foot">11</div>
+</section>
+
+<!-- 12 L10 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.37 チャレンジ問題</span>
+  <h2>並べかえよう</h2>
+  <div class="box">語順：主語 ＋ <span class="mk">be動詞</span> ＋ <span class="mk">-ing</span> …（疑問は be動詞を前に出す）</div>
+  <div class="qs">
+    <div class="q"><span class="no">(1)</span>私の父は電話中です。<br>( my father / talking / is ) on the phone.
+      <div class="ans">→ <b>My father is talking</b> on the phone.<span class="why">「電話中」＝話している最中 → 進行形。</span></div></div>
+    <div class="q"><span class="no">(2)</span>あなたはトムを待っているのですか。<br>( you / are / Tom / waiting for )?
+      <div class="ans">→ <b>Are you waiting for Tom?</b><span class="why">疑問文なので Are を主語の前へ。</span></div></div>
+    <div class="q"><span class="no">(3)</span>翔太は部屋で宿題をしていましたか。<br>( doing / Shota / his homework / was ) in his room?
+      <div class="ans">→ <b>Was Shota doing his homework</b> in his room?<span class="why">過去進行形の疑問 → Was ＋ 主語 ＋ -ing。</span></div></div>
+  </div>
+  <div class="foot">12</div>
+</section>
+
+<!-- 13 L10 文法知っ得 -->
+<section class="slide">
+  <span class="tag g">p.37 文法知っ得コーナー</span>
+  <h2>進行形にできない動詞は？</h2>
+  <p class="lead">have・like のような「状態を表す動詞」はふつう進行形にしない。進行形にできない動詞に○（タップで答え）</p>
+  <div class="qs wgrid">
+    <div class="q"><span class="no">①</span>know<div class="ans">→ <b>○</b><span class="why">知っている＝状態</span></div></div>
+    <div class="q"><span class="no">②</span>sing<div class="ans">→ ✕<span class="why">動作 → できる</span></div></div>
+    <div class="q"><span class="no">③</span>love<div class="ans">→ <b>○</b><span class="why">気持ち＝状態</span></div></div>
+    <div class="q"><span class="no">④</span>read<div class="ans">→ ✕<span class="why">動作 → できる</span></div></div>
+    <div class="q"><span class="no">⑤</span>hope<div class="ans">→ <b>○</b><span class="why">気持ち＝状態</span></div></div>
+    <div class="q"><span class="no">⑥</span>want<div class="ans">→ <b>○</b><span class="why">気持ち＝状態</span></div></div>
+    <div class="q"><span class="no">⑦</span>listen<div class="ans">→ ✕<span class="why">動作 → できる</span></div></div>
+    <div class="q"><span class="no">⑧</span>hear<div class="ans">→ <b>○</b><span class="why">自然に聞こえる＝状態</span></div></div>
+    <div class="q"><span class="no">⑨</span>see<div class="ans">→ <b>○</b><span class="why">自然に見える＝状態</span></div></div>
+    <div class="q"><span class="no">⑩</span>watch<div class="ans">→ ✕<span class="why">動作 → できる</span></div></div>
+  </div>
+  <div class="foot">13</div>
+</section>
+
+<!-- 14 まとめ -->
+<section class="slide">
+  <span class="tag">まとめ</span>
+  <h2>今日のポイント</h2>
+  <div class="qs" style="gap:16px">
+    <div class="box">① <b>There is / are</b>：後ろの名詞が単数なら is、複数なら are。否定・疑問は some → <b>any</b>。</div>
+    <div class="box">② 特定のもの（my 〜 など）には There is を使わない。</div>
+    <div class="box red">③ <b>進行形</b>＝ be動詞 ＋ -ing。「今」なら am/is/are、「そのとき」なら was/were。-ing の作り方に注意！</div>
+  </div>
+  <div class="foot">14</div>
+</section>
+
+</div>
+
+<div id="nav">
+  <button onclick="go(-1)">◀ 前</button>
+  <button onclick="revealAll()">答えを全部</button>
+  <button onclick="hideAll()">隠す</button>
+  <button onclick="fs()">全画面</button>
+  <button onclick="go(1)">次 ▶</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].classList.add('active');}
+function go(d){show(cur+d);}
+function qs(){return [...slides[cur].querySelectorAll('.q')];}
+function step(){const h=qs().find(q=>!q.classList.contains('open'));if(h)h.classList.add('open');else go(1);}
+function revealAll(){qs().forEach(q=>q.classList.add('open'));}
+function hideAll(){qs().forEach(q=>q.classList.remove('open'));}
+function fs(){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}catch(e){}}
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',e=>{e.stopPropagation();q.classList.toggle('open');}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  else if(e.key===' '||e.key==='Enter'){e.preventDefault();step();}
+  else if(e.key==='a')revealAll();
+  else if(e.key==='f')fs();
+});
+let sx=null;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?1:-1);sx=null;});
+function fit(){const s=Math.min(innerWidth/1300,(innerHeight-50)/740);document.getElementById('stage').style.transform=`translate(-50%,-50%) translate(0,-18px) scale(${s})`;}
+addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>
